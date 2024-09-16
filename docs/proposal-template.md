@@ -1,26 +1,28 @@
-Team name:
+Team name: The Machine Learners
 
-Team members:
+Team members: Andrew Hills, Chai Callow, Preston Thomas
 
 # Introduction
+Our project concept involves making a desktop client for users to track their workouts. We want our project to help guide people on their fitness and self care journeys.
 
-(In 2-4 paragraphs, describe your project concept)
-(Also define some loosely defined features of your project using bullet points)
+We anticipate that this program will have several features that make it useful to our user base. We will also implement features to add readability and make our project more broadly useable.
+
+Our feature ideas:
+- A GUI to make our program easy to use
+- A feature to track time spent in a workout
+- A feature to allow users to input movements they've done throughout the workout
+- A feature that will briefly describe to a user how to properly do a movement
+- Potentially add images to each movement
 
 # Anticipated Technologies
-
-(What technologies are needed to build this project)
+Python will be sufficient here. We will also use Git for version control, and possibly create a Jira board to ensure tasks get knocked out in a timely fashion.
 
 # Method/Approach
-
-(What is your estimated "plan of attack" for developing this project)
+We would each like to pour several hours a week into the project. We want to first get the GUI up and running. From there, we'll worry about implementing the workout tracking feature. The time feature should be fairly easy, so we will probably save that one for last.
 
 # Estimated Timeline
-
-(Figure out what your major milestones for this project will be, including how long you anticipate it *may* take to reach that point)
+The major milestones for this project will be:
+Getting the GUI up and running. This will probably take us a couple of weeks of work. The longest part will be implementing each of the movements, with descriptions on how to do them. This will take the bulk of the semester to implement. Finally, we'll want to polish it off and make it run smoothly, and be aesthetically pleasing. This should take a few weeks as well.
 
 # Anticipated Problems
-
-(Describe any problems you foresee that you will need to overcome)
-
-Remember this is a living document is expected to be changed as you make progress on your project.
+*hopefully* we don't run in to any problems. Currently, we aren't antipating anything.
