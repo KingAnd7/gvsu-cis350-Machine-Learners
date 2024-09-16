@@ -9,7 +9,7 @@ A cool, very on fleek, dapper exercise desktop program. The exercise program wil
 * Chai Callow (amatuer body builder)
 
 ## Prerequisites
-TBA
+Users must have a membership subscription to RepSquad. This shows loyalty to the RepNation-the most elite group of people who exercise.
 
 ## Run Instructions
 TBA
