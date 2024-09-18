@@ -4,9 +4,9 @@ A cool, very on fleek, dapper exercise desktop program. The exercise program wil
 
 ## Team Members and Roles
 
-* Andrew Hills (Leader, coolest group member) 
-* Preston Thomas (second coolest group member, extra cool guy, tester, professional GitHub pusher)
-* Chai Callow (amatuer body builder)
+* Andrew Hills
+* Preston Thomas
+* Chai Callow
 
 ## Prerequisites
 Users must have a membership subscription to RepSquad. This shows loyalty to the RepNation-the most elite group of people who exercise.
