@@ -4,7 +4,7 @@ A cool, very on fleek, dapper exercise desktop program. The exercise program wil
 
 ## Team Members and Roles
 
-* Andrew Hills
+* [Andrew Hills](https://github.com/KingAnd7/CIS350-HW2-Hills)
 * [Preston Thomas](https://github.com/preston-thomas/CIS350-HW2-Thomas)
 * Chai Callow
 
