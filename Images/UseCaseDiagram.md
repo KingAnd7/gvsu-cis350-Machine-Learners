@@ -1,2 +1,3 @@
 # USE CASE DIAGRAM (Work in progress)
-<img width="2096" alt="UseCaseDiagram" src="https://github.com/user-attachments/assets/9c00f957-8ed0-4329-bb84-bc331082596a">
+
+<img width="2165" alt="UseCaseDiagram" src="https://github.com/user-attachments/assets/7a4fe54b-cb41-4d94-bdbf-1582ecbbf1f0">
