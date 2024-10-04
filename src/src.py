@@ -2,7 +2,7 @@ import tkinter as tk
 import time
 root = tk.Tk()
 root.title("Workout Program")
-label = tk.Label(root, text="This is a workout program")
+label = tk.Label(root, text="This is a workout program. More coming soon...")
 label.pack()
 root.mainloop()
  
