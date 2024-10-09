@@ -4,9 +4,9 @@ A cool, very on fleek, dapper exercise desktop program. The exercise program wil
 
 ## Team Members and Roles
 
-* [Andrew Hills](https://github.com/KingAnd7/CIS350-HW2-Hills)
-* [Preston Thomas](https://github.com/preston-thomas/CIS350-HW2-Thomas)
-* [Chai Callow](https://github.com/callchai/CIS350-HW2-Callow)
+* [Andrew Hills](https://github.com/KingAnd7/CIS350-HW2-Hills) (Leader, coder, Project Developer, Amatuer weightlifter)
+* [Preston Thomas](https://github.com/preston-thomas/CIS350-HW2-Thomas) (Project Manager, coder, Project Developer, Professional weightligheter)
+* [Chai Callow](https://github.com/callchai/CIS350-HW2-Callow) (Documenter, coder, Project Developer)
 
 ## Prerequisites
 Users must have a membership subscription to RepSquad. This shows loyalty to the RepNation-the most elite group of people who exercise.
