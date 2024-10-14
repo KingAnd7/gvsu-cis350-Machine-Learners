@@ -5,7 +5,7 @@ A cool, very on fleek, dapper exercise desktop program. The exercise program wil
 ## Team Members and Roles
 
 * [Andrew Hills](https://github.com/KingAnd7/CIS350-HW2-Hills) (Leader, coder, Project Developer, Amatuer weightlifter)
-* [Preston Thomas](https://github.com/preston-thomas/CIS350-HW2-Thomas) (Project Manager, coder, Project Developer, Professional weightligheter)
+* [Preston Thomas](https://github.com/preston-thomas/CIS350-HW2-Thomas) (Project Manager, coder, Project Developer, Professional weightligheter, documenter proof-reader)
 * [Chai Callow](https://github.com/callchai/CIS350-HW2-Callow) (Documenter, coder, Project Developer)
 
 ## Prerequisites
