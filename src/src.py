@@ -5,6 +5,10 @@ root.title("Workout Program")
 label = tk.Label(root, text="This is a workout program. More coming soon...")
 label.pack()
 root.mainloop()
+
+class Stopwatch:
+    def __init__(self) -> None:
+        pass
  
 class Exercise:
     def __init__(self, name="None", sets=0, reps=0, muscle_group1="None", muscle_group2="None", summary='') -> None:
