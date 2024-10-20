@@ -4,12 +4,44 @@ root = tk.Tk()
 root.title("Workout Program")
 label = tk.Label(root, text="This is a workout program. More coming soon...")
 label.pack()
-root.mainloop()
 
 class Stopwatch:
-    def __init__(self) -> None:
+    def __init__(self, root) -> None:
+        self.running = False
+        self.time = 0
+        self.root = root
+        self.label = tk.Label(root, text="00:00:00", font=("Helvetica", 48))
+        self.label.pack(pady=20)
+
+        self.start_button = tk.Button(root, text="Start", command=self.start)
+        self.start_button.pack(side=tk.LEFT, padx=10)
+
+        self.stop_button = tk.Button(root, text="Stop", command=self.stop)
+        self.stop_button.pack(side=tk.LEFT, padx=10)
+
+        self.reset_button = tk.Button(root, text="Reset", command=self.reset)
+        self.reset_button.pack(side=tk.LEFT, padx=10)
+
+    def update_timer(self):
         pass
- 
+
+    def start(self):
+        if not self.running:
+            self.running = True
+            self.update_timer()
+
+    def stop(self):
+        self.running = False
+
+    def reset(self):
+        pass
+
+root.title("Stopwatch")
+
+stopwatch = Stopwatch(root)
+
+root.mainloop()
+
 class Exercise:
     def __init__(self, name="None", sets=0, reps=0, muscle_group1="None", muscle_group2="None", summary='') -> None:
         self.name = name
