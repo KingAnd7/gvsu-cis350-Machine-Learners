@@ -1,6 +1,6 @@
 import tkinter as tk
 import time
-import customtkinter as ctk
+import customtkinter
 root = tk.Tk()
 root.title("Workout Program")
 label = tk.Label(root, text="This is a workout program. More coming soon...")
