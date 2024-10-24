@@ -24,7 +24,12 @@ class Stopwatch:
         self.reset_button.pack(side=tk.LEFT, padx=10)
 
     def update_timer(self):
-        pass
+        if self.running:
+            self.time += 1
+            minutes, seconds = divmod(self.time, 60)
+            hours, minutes = divmod(minutes, 60)
+            self.label.config(text=f"{hours:02}:{minutes:02}:{seconds:02}")
+            self.root.after(1000, self.update_timer)
 
     def start(self):
         if not self.running:
@@ -35,7 +40,9 @@ class Stopwatch:
         self.running = False
 
     def reset(self):
-        pass
+        self.running = False
+        self.time = 0
+        self.label.config(text="00:00:00")
 
 root.title("Stopwatch")
 
