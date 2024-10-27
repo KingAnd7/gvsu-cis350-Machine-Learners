@@ -12,6 +12,12 @@ tk.Label(sidebar, text="RepNation", bg="lightgrey", font=("Helvetica", 16)).pack
 tk.Button(sidebar, text="Stopwatch", command=lambda: show_stopwatch(content_frame)).pack(fill="x")
 tk.Button(sidebar, text="Exercises", command=lambda: show_exercises(content_frame)).pack(fill="x")
 
+def show_exercises(frame):
+    pass
+
+def show_stopwatch(frame):
+    pass
+
 class Stopwatch:
     def __init__(self, root) -> None:
         self.running = False
