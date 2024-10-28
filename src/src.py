@@ -27,20 +27,20 @@ class Stopwatch:
         self.label.pack(pady=20)
 
         self.start_button = ctk.CTkButton(root, text="Start", command=self.start)
-        self.start_button.pack(side=tk.LEFT, padx=10)
+        self.start_button.pack(side=ctk.LEFT, padx=10)
 
         self.stop_button = ctk.CTkButton(root, text="Stop", command=self.stop)
-        self.stop_button.pack(side=tk.LEFT, padx=10)
+        self.stop_button.pack(side=ctk.LEFT, padx=10)
 
         self.reset_button = ctk.CTkButton(root, text="Reset", command=self.reset)
-        self.reset_button.pack(side=tk.LEFT, padx=10)
+        self.reset_button.pack(side=ctk.LEFT, padx=10)
 
     def update_timer(self):
         if self.running:
             self.time += 1
             minutes, seconds = divmod(self.time, 60)
             hours, minutes = divmod(minutes, 60)
-            self.label.config(text=f"{hours:02}:{minutes:02}:{seconds:02}")
+            self.label.configure(text=f"{hours:02}:{minutes:02}:{seconds:02}")
             self.root.after(1000, self.update_timer)
 
     def start(self):
@@ -54,7 +54,7 @@ class Stopwatch:
     def reset(self):
         self.running = False
         self.time = 0
-        self.label.config(text="00:00:00")
+        self.label.configure(text="00:00:00")
 
 root.title("Stopwatch")
 
