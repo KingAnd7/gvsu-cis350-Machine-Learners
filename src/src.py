@@ -4,11 +4,11 @@ import time
 root = tk.Tk()
 root.title("Workout Program")
 
-sidebar = tk.Frame(root, width=200, bg="lightgrey", relief="sunken")
+sidebar = tk.Frame(root, width=200, background="lightgrey", relief="sunken")
 sidebar.pack(side="left", fill="y")
 
 # add some function that shows stopwatch and shows exercises
-tk.Label(sidebar, text="RepNation", bg="lightgrey", font=("Helvetica", 16)).pack(pady=10)
+tk.Label(sidebar, text="RepNation", background="lightgrey", font=("Helvetica", 16)).pack(pady=10)
 tk.Button(sidebar, text="Stopwatch", command=lambda: show_stopwatch(content_frame)).pack(fill="x")
 tk.Button(sidebar, text="Exercises", command=lambda: show_exercises(content_frame)).pack(fill="x")
 
