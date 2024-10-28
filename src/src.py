@@ -1,16 +1,16 @@
 import tkinter as tk
 import time
-#import customtkinter
-root = tk.Tk()
+import customtkinter as ctk
+root = ctk.CTk()
 root.title("Workout Program")
 
-sidebar = tk.Frame(root, width=200, background="lightgrey", relief="sunken")
+sidebar = ctk.CTkFrame(root, width=200)
 sidebar.pack(side="left", fill="y")
 
 # add some function that shows stopwatch and shows exercises
-tk.Label(sidebar, text="RepNation", background="lightgrey", font=("Helvetica", 16)).pack(pady=10)
-tk.Button(sidebar, text="Stopwatch", command=lambda: show_stopwatch(content_frame)).pack(fill="x")
-tk.Button(sidebar, text="Exercises", command=lambda: show_exercises(content_frame)).pack(fill="x")
+ctk.CTkLabel(sidebar, text="RepNation", font=("Helvetica", 16)).pack(pady=10)
+ctk.CTkButton(sidebar, text="Stopwatch", command=lambda: show_stopwatch(content_frame)).pack(fill="x")
+ctk.CTkButton(sidebar, text="Exercises", command=lambda: show_exercises(content_frame)).pack(fill="x")
 
 def show_exercises(frame):
     pass
@@ -23,16 +23,16 @@ class Stopwatch:
         self.running = False
         self.time = 0
         self.root = root
-        self.label = tk.Label(root, text="00:00:00", font=("Helvetica", 48))
+        self.label = ctk.CTkLabel(root, text="00:00:00", font=("Helvetica", 48))
         self.label.pack(pady=20)
 
-        self.start_button = tk.Button(root, text="Start", command=self.start)
+        self.start_button = ctk.CTkButton(root, text="Start", command=self.start)
         self.start_button.pack(side=tk.LEFT, padx=10)
 
-        self.stop_button = tk.Button(root, text="Stop", command=self.stop)
+        self.stop_button = ctk.CTkButton(root, text="Stop", command=self.stop)
         self.stop_button.pack(side=tk.LEFT, padx=10)
 
-        self.reset_button = tk.Button(root, text="Reset", command=self.reset)
+        self.reset_button = ctk.CTkButton(root, text="Reset", command=self.reset)
         self.reset_button.pack(side=tk.LEFT, padx=10)
 
     def update_timer(self):
