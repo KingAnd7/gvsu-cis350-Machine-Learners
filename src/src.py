@@ -3,6 +3,7 @@ import time
 import customtkinter as ctk
 root = ctk.CTk()
 root.title("Workout Program")
+ctk.set_default_color_theme("dark-blue")  
 
 sidebar = ctk.CTkFrame(root, width=200)
 sidebar.pack(side="left", fill="y")
@@ -55,8 +56,6 @@ class Stopwatch:
         self.running = False
         self.time = 0
         self.label.configure(text="00:00:00")
-
-root.title("Stopwatch")
 
 stopwatch = Stopwatch(root)
 
