@@ -8,16 +8,29 @@ ctk.set_default_color_theme("dark-blue")
 sidebar = ctk.CTkFrame(root, width=200)
 sidebar.pack(side="left", fill="y")
 
+content_frame = ctk.CTkFrame(root)
+content_frame.pack(side="left", fill="both", expand=True)
+
 # add some function that shows stopwatch and shows exercises
 ctk.CTkLabel(sidebar, text="RepNation", font=("Helvetica", 16)).pack(pady=10)
 ctk.CTkButton(sidebar, text="Stopwatch", command=lambda: show_stopwatch(content_frame)).pack(fill="x")
 ctk.CTkButton(sidebar, text="Exercises", command=lambda: show_exercises(content_frame)).pack(fill="x")
 
-def show_exercises(frame):
-    pass
-
 def show_stopwatch(frame):
-    pass
+    for widget in frame.winfo_children():
+        widget.destroy()
+    stopwatch = Stopwatch(frame)
+
+def show_exercises(frame):
+    for widget in frame.winfo_children():
+        widget.destroy()
+    for exercise in movements:
+        exercise_frame = ctk.CTkFrame(frame)
+        exercise_frame.pack(pady=5, fill="x")
+        name_label = ctk.CTkLabel(exercise_frame, text=exercise.get_name(), font=("Helvetica", 16))
+        name_label.pack(side="left", padx=10)
+        summary_label = ctk.CTkLabel(exercise_frame, text=exercise.get_summary())
+        summary_label.pack(side="left", padx=10)
 
 class Stopwatch:
     def __init__(self, root) -> None:
@@ -27,13 +40,16 @@ class Stopwatch:
         self.label = ctk.CTkLabel(root, text="00:00:00", font=("Helvetica", 48))
         self.label.pack(pady=20)
 
-        self.start_button = ctk.CTkButton(root, text="Start", command=self.start)
+        button_frame = ctk.CTkFrame(root)
+        button_frame.pack(pady=10)
+
+        self.start_button = ctk.CTkButton(button_frame, text="Start", command=self.start)
         self.start_button.pack(side=ctk.LEFT, padx=10)
 
-        self.stop_button = ctk.CTkButton(root, text="Stop", command=self.stop)
+        self.stop_button = ctk.CTkButton(button_frame, text="Stop", command=self.stop)
         self.stop_button.pack(side=ctk.LEFT, padx=10)
 
-        self.reset_button = ctk.CTkButton(root, text="Reset", command=self.reset)
+        self.reset_button = ctk.CTkButton(button_frame, text="Reset", command=self.reset)
         self.reset_button.pack(side=ctk.LEFT, padx=10)
 
     def update_timer(self):
@@ -56,10 +72,6 @@ class Stopwatch:
         self.running = False
         self.time = 0
         self.label.configure(text="00:00:00")
-
-stopwatch = Stopwatch(root)
-
-root.mainloop()
 
 class Exercise:
     def __init__(self, name="None", sets=0, reps=0, muscle_group1="None", muscle_group2="None", summary='') -> None:
@@ -196,3 +208,4 @@ movements.append(sit_up)
 russian_twist = Exercise("Russian Twist", 0, 0, "Core", "Obliques", "Sit on the floor, lean back slightly, and twist your torso side to side while holding a weight or medicine ball.")
 movements.append(russian_twist)
 
+root.mainloop()
