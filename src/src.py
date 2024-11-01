@@ -13,8 +13,13 @@ content_frame.pack(side="left", fill="both", expand=True)
 
 # add some function that shows stopwatch and shows exercises
 ctk.CTkLabel(sidebar, text="RepNation", font=("Helvetica", 16)).pack(pady=10)
+ctk.CTkButton(sidebar, text="Workout", command=lambda: show_workout(content_frame)).pack(fill="x")
 ctk.CTkButton(sidebar, text="Stopwatch", command=lambda: show_stopwatch(content_frame)).pack(fill="x")
 ctk.CTkButton(sidebar, text="Exercises", command=lambda: show_exercises(content_frame)).pack(fill="x")
+
+def show_workout(frame):
+    for widget in frame.winfo_children():
+        widget.destroy()
 
 def show_stopwatch(frame):
     for widget in frame.winfo_children():
@@ -29,8 +34,13 @@ def show_exercises(frame):
         exercise_frame.pack(pady=5, fill="x")
         name_label = ctk.CTkLabel(exercise_frame, text=exercise.get_name(), font=("Helvetica", 16))
         name_label.pack(side="left", padx=10)
-        summary_label = ctk.CTkLabel(exercise_frame, text=exercise.get_summary())
+        summary_label = ctk.CTkLabel(exercise_frame, text=exercise.get_summary(), font=("", 12))
         summary_label.pack(side="left", padx=10)
+        musclegroup1_label = ctk.CTkLabel(exercise_frame, text=f"Primary muscle Group: {exercise.get_muscle_group1()}", font=("", 10))
+        musclegroup1_label.pack(side="left", padx=10)
+        if exercise.get_muscle_group2() != "":
+            musclegroup2_label = ctk.CTkLabel(exercise_frame, text=f"Secondary Muscle Group: {exercise.get_muscle_group2()}", font=("", 10))
+            musclegroup2_label.pack(side="left", padx=10)
 
 class Stopwatch:
     def __init__(self, root) -> None:
