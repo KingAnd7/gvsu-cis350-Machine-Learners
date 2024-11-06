@@ -2,14 +2,14 @@
 - **Name:** Create Timer to Track Workout  
   **Description:** Implemented a timer to assist in tracking workouts.  
   **Expected time to complete:** 2  
-  **Responsible:** Andrew  
+  **Responsible:** Andrew
+  
+- **Name:** GUI Implementation  
+  **Description:** Implement a starter GUI that allows basic traversel in the program.
+  **Expected time to complete:** 3 hours  
+  **Responsible:** Andrew
 
 ## Not Completed
-- **Name:** GUI Implementation  
-  **Description:** Implement the graphical user interface for the application.  
-  **Expected time to complete:** 3 hours  
-  **Responsible:** Andrew  
-
 - **Name:** Add All Exercises with Muscle Group  
   **Description:** Populate exercise list categorized by muscle groups.  
   **Expected time to complete:** 2 hours  
@@ -33,4 +33,9 @@
 - **Name:** UML and Class Diagrams
   **Description:** Creating a class diagram and UML diagram for our project.
   **Expected time to compelete:** This is probably going to be finished when the project is finished; the diagrams will be updated as the project is worked on.
-  **Rsponsible:** Chai
+  **Responsible:** Chai
+
+- **Name:** Interval timer
+  **Description:** Implement an interval timer to time intervals to workout.
+  **Expected time to complete:** 2 hours
+  **Responsible:** Chai
