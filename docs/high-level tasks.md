@@ -4,9 +4,9 @@
   **Expected time to complete:** 2  
   **Responsible:** Andrew
   
-- **Name:** GUI Implementation  
+- **Name:** GUI Implementation
   **Description:** Implement a starter GUI that allows basic traversel in the program.
-  **Expected time to complete:** 3 hours  
+  **Expected time to complete:** 3 hours
   **Responsible:** Andrew
 
 ## Not Completed
@@ -25,17 +25,12 @@
   **Expected time to complete:** 1 hours  
   **Responsible:** Chai  
 
-- **Name:** Calendar  
-  **Description:** Implement a calendar feature in the application.  
-  **Expected time to complete:** 3 hours (this will be scrapped if deadlines are approaching).
-  **Responsible:** Chai 
-
-- **Name:** UML and Class Diagrams
-  **Description:** Creating a class diagram and UML diagram for our project.
-  **Expected time to compelete:** This is probably going to be finished when the project is finished; the diagrams will be updated as the project is worked on.
+- **Name:** Create interval timer.
+  **Description:** Implemented an interval timer alongside regular timer.
+  **Expected time to complete:** 2 hours
   **Responsible:** Chai
 
-- **Name:** Interval timer
-  **Description:** Implement an interval timer to time intervals to workout.
-  **Expected time to complete:** 2 hours
+- **Name:** Create UML and class diagrams.
+  **Description:** Create and update class and UML diagram for project.
+  **Expected time to complete:** This will be updated as the project is worked on.
   **Responsible:** Chai
