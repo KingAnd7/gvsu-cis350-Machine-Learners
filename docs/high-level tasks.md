@@ -27,5 +27,10 @@
 
 - **Name:** Calendar  
   **Description:** Implement a calendar feature in the application.  
-  **Expected time to complete:** 3 hours  
-  **Responsible:** Chai  
+  **Expected time to complete:** 3 hours (this will be scrapped if deadlines are approaching).
+  **Responsible:** Chai 
+
+- **Name:** UML and Class Diagrams
+  **Description:** Creating a class diagram and UML diagram for our project.
+  **Expected time to compelete:** This is probably going to be finished when the project is finished; the diagrams will be updated as the project is worked on.
+  **Rsponsible:** Chai
