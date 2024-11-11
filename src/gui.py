@@ -5,7 +5,8 @@ import customtkinter as ctk
 
 root = ctk.CTk()
 root.title("Workout Program")
-ctk.set_default_color_theme("dark-blue")  
+ctk.set_default_color_theme("dark-blue") 
+root.geometry("800x600")   
 
 sidebar = ctk.CTkFrame(root, width=200)
 sidebar.pack(side="left", fill="y")
@@ -18,6 +19,20 @@ ctk.CTkLabel(sidebar, text="Rep Nation", font=("Helvetica", 16)).pack(pady=10)
 ctk.CTkButton(sidebar, text="Workout", command=lambda: show_workout(content_frame)).pack(fill="x")
 ctk.CTkButton(sidebar, text="Stopwatch", command=lambda: show_stopwatch(content_frame)).pack(fill="x")
 ctk.CTkButton(sidebar, text="Exercises", command=lambda: show_exercises(content_frame)).pack(fill="x")
+
+start_frame = ctk.CTkFrame(content_frame)
+start_frame.pack(fill="both", expand=True)
+
+def show_start_screen():
+    start_label = ctk.CTkLabel(start_frame, text="Welcome to the Workout Program", font=("Helvetica", 24))
+    start_label.pack(pady=20)
+
+    proceed_button = ctk.CTkButton(start_frame, text="Proceed", command=proceed_to_main)
+    proceed_button.pack(pady=10)
+
+def proceed_to_main():
+    start_frame.pack_forget()
+    show_workout(content_frame)
 
 def show_workout(frame):
     for widget in frame.winfo_children():
@@ -94,3 +109,5 @@ class Stopwatch:
         self.running = False
         self.time = 0
         self.label.configure(text="00:00:00")
+
+show_start_screen()
