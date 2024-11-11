@@ -22,6 +22,7 @@ ctk.CTkButton(sidebar, text="Exercises", command=lambda: show_exercises(content_
 def show_workout(frame):
     for widget in frame.winfo_children():
         widget.destroy()
+    workout = Workout(frame)
 
 def show_stopwatch(frame):
     for widget in frame.winfo_children():
@@ -47,6 +48,11 @@ def show_exercises(frame):
         if exercise.get_muscle_group2() != "":
             musclegroup2_label = ctk.CTkLabel(exercise_frame, text=f"Secondary Muscle Group: {exercise.get_muscle_group2()}", font=("", 10))
             musclegroup2_label.pack(side="left", padx=10)
+
+class Workout:
+    def __init__(self, root):
+        self.label = ctk.CTkLabel(root, text="Workout", fg_color="transparent")
+        self.label.pack(pady=20)
 
 class Stopwatch:
     def __init__(self, root) -> None:
