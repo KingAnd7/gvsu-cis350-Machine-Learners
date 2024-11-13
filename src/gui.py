@@ -66,7 +66,7 @@ def show_exercises(frame):
 
 class Workout:
     def __init__(self, root):
-        self.label = ctk.CTkLabel(root, text="Workout", fg_color="transparent")
+        self.label = ctk.CTkLabel(root, text="Technology", fg_color="transparent")
         self.label.pack(pady=20)
 
 class Stopwatch:
