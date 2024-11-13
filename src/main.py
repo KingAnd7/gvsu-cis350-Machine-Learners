@@ -1,4 +1,4 @@
-from gui import root
+from gui import *
 from exercise import Exercise
 
 if __name__ == "__main__":

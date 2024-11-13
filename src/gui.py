@@ -48,11 +48,11 @@ def show_exercises(frame):
     for widget in frame.winfo_children():
         widget.destroy()
 
-    scrollable_frame = ctk.CTkScrollableFrame(frame, width=600, height=600)
+    scrollable_frame = ctk.CTkScrollableFrame(frame, width=600, height=600, fg_color="transparent")
     scrollable_frame.pack(fill="both", expand=True, padx=10, pady=10)
     
     for exercise in movements:
-        exercise_frame = ctk.CTkFrame(scrollable_frame)
+        exercise_frame = ctk.CTkFrame(scrollable_frame, fg_color="blue")
         exercise_frame.pack(pady=5, fill="x")
         name_label = ctk.CTkLabel(exercise_frame, text=exercise.get_name(), font=("Helvetica", 16))
         name_label.pack(side="left", padx=10)
