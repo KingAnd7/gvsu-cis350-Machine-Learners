@@ -110,4 +110,5 @@ class Stopwatch:
         self.time = 0
         self.label.configure(text="00:00:00")
 
+
 show_start_screen()
