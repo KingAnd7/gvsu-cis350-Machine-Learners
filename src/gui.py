@@ -20,12 +20,12 @@ ctk.CTkButton(sidebar, text="Workout", command=lambda: show_workout(content_fram
 ctk.CTkButton(sidebar, text="Stopwatch", command=lambda: show_stopwatch(content_frame)).pack(fill="x")
 ctk.CTkButton(sidebar, text="Exercises", command=lambda: show_exercises(content_frame)).pack(fill="x")
 
-start_frame = ctk.CTkFrame(content_frame)
+start_frame = ctk.CTkFrame(content_frame, fg_color="transparent")
 start_frame.pack(fill="both", expand=True)
 
 
 def show_start_screen():
-    start_label = ctk.CTkLabel(start_frame, text="Welcome to the Workout Program!", font=("Helvetica", 24))
+    start_label = ctk.CTkLabel(start_frame, text="Welcome to the Workout Program!", font=("Helvetica", 24), fg_color="transparent")
     start_label.pack(pady=20)
 
     proceed_button = ctk.CTkButton(start_frame, text="Proceed", command=proceed_to_main)
@@ -57,7 +57,7 @@ def show_exercises(frame):
     scrollable_frame.pack(fill="both", expand=True, padx=10, pady=10)
 
     for exercise in movements:
-        exercise_frame = ctk.CTkFrame(scrollable_frame, fg_color="blue")
+        exercise_frame = ctk.CTkFrame(scrollable_frame, fg_color="gray14")
         exercise_frame.pack(pady=5, fill="x")
         name_label = ctk.CTkLabel(exercise_frame, text=exercise.get_name(), font=("Helvetica", 16))
         name_label.pack(side="left", padx=10)
@@ -84,10 +84,10 @@ class Stopwatch:
         self.running = False
         self.time = 0
         self.root = root
-        self.label = ctk.CTkLabel(root, text="00:00:00", font=("Helvetica", 48))
+        self.label = ctk.CTkLabel(root, text="00:00:00", font=("Helvetica", 48), fg_color="transparent")
         self.label.pack(pady=20)
 
-        button_frame = ctk.CTkFrame(root)
+        button_frame = ctk.CTkFrame(root, fg_color="transparent")
         button_frame.pack(pady=10)
 
         self.start_button = ctk.CTkButton(button_frame, text="Start", command=self.start)
