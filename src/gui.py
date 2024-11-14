@@ -19,6 +19,7 @@ ctk.CTkLabel(sidebar, text="Rep Nation", font=("Helvetica", 16)).pack(pady=10)
 ctk.CTkButton(sidebar, text="Workout", command=lambda: show_workout(content_frame)).pack(fill="x")
 ctk.CTkButton(sidebar, text="Stopwatch", command=lambda: show_stopwatch(content_frame)).pack(fill="x")
 ctk.CTkButton(sidebar, text="Exercises", command=lambda: show_exercises(content_frame)).pack(fill="x")
+ctk.CTkButton(sidebar, text="Instructions", command=lambda: show_instructions(content_frame)).pack(fill="x")
 
 start_frame = ctk.CTkFrame(content_frame, fg_color="transparent")
 start_frame.pack(fill="both", expand=True)
@@ -99,6 +100,9 @@ class Stopwatch:
         self.reset_button = ctk.CTkButton(button_frame, text="Reset", command=self.reset)
         self.reset_button.pack(side=ctk.LEFT, padx=10)
 
+        self.interval_button = ctk.CTkButton(button_frame, text="Interval", command=self.interval)
+        self.interval_button.pack(side=ctk.LEFT, padx=10)
+
     def update_timer(self):
         if self.running:
             self.time += 1
@@ -119,6 +123,12 @@ class Stopwatch:
         self.running = False
         self.time = 0
         self.label.configure(text="00:00:00")
+
+    def interval(self):
+        if self.running:
+            minutes, seconds = divmod(self.time, 60)
+            hours, minutes = divmod(minutes, 60)
+            print(f"{hours:02}:{minutes:02}:{seconds:02}")
 
 
 show_start_screen()
