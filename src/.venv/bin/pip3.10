@@ -1,4 +1,4 @@
-#!/Users/prestonthomas/Desktop/GitHub/gvsu-cis350/src/.venv/bin/python
+#!/Users/prestonthomas/Desktop/GitHub/gvsu-cis350/src/.venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

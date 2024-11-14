@@ -5,8 +5,8 @@ import customtkinter as ctk
 
 root = ctk.CTk()
 root.title("Workout Program")
-ctk.set_default_color_theme("dark-blue") 
-root.geometry("800x600")   
+ctk.set_default_color_theme("dark-blue")
+root.geometry("800x600")
 
 sidebar = ctk.CTkFrame(root, width=200)
 sidebar.pack(side="left", fill="y")
@@ -23,26 +23,31 @@ ctk.CTkButton(sidebar, text="Exercises", command=lambda: show_exercises(content_
 start_frame = ctk.CTkFrame(content_frame)
 start_frame.pack(fill="both", expand=True)
 
+
 def show_start_screen():
-    start_label = ctk.CTkLabel(start_frame, text="Welcome to the Workout Program", font=("Helvetica", 24))
+    start_label = ctk.CTkLabel(start_frame, text="Welcome to the Workout Program!", font=("Helvetica", 24))
     start_label.pack(pady=20)
 
     proceed_button = ctk.CTkButton(start_frame, text="Proceed", command=proceed_to_main)
     proceed_button.pack(pady=10)
 
+
 def proceed_to_main():
     start_frame.pack_forget()
     show_workout(content_frame)
+
 
 def show_workout(frame):
     for widget in frame.winfo_children():
         widget.destroy()
     workout = Workout(frame)
 
+
 def show_stopwatch(frame):
     for widget in frame.winfo_children():
         widget.destroy()
     stopwatch = Stopwatch(frame)
+
 
 def show_exercises(frame):
     for widget in frame.winfo_children():
@@ -50,7 +55,7 @@ def show_exercises(frame):
 
     scrollable_frame = ctk.CTkScrollableFrame(frame, width=600, height=600, fg_color="transparent")
     scrollable_frame.pack(fill="both", expand=True, padx=10, pady=10)
-    
+
     for exercise in movements:
         exercise_frame = ctk.CTkFrame(scrollable_frame, fg_color="blue")
         exercise_frame.pack(pady=5, fill="x")
@@ -58,16 +63,21 @@ def show_exercises(frame):
         name_label.pack(side="left", padx=10)
         summary_label = ctk.CTkLabel(exercise_frame, text=exercise.get_summary(), font=("", 12))
         summary_label.pack(side="left", padx=10)
-        musclegroup1_label = ctk.CTkLabel(exercise_frame, text=f"Primary muscle Group: {exercise.get_muscle_group1()}", font=("", 10))
+        musclegroup1_label = ctk.CTkLabel(exercise_frame, text=f"Primary muscle group: {exercise.get_muscle_group1()}",
+                                          font=("", 10))
         musclegroup1_label.pack(side="left", padx=10)
         if exercise.get_muscle_group2() != "":
-            musclegroup2_label = ctk.CTkLabel(exercise_frame, text=f"Secondary Muscle Group: {exercise.get_muscle_group2()}", font=("", 10))
+            musclegroup2_label = ctk.CTkLabel(exercise_frame,
+                                              text=f"Secondary muscle group: {exercise.get_muscle_group2()}",
+                                              font=("", 10))
             musclegroup2_label.pack(side="left", padx=10)
+
 
 class Workout:
     def __init__(self, root):
         self.label = ctk.CTkLabel(root, text="Technology", fg_color="transparent")
         self.label.pack(pady=20)
+
 
 class Stopwatch:
     def __init__(self, root) -> None:
@@ -109,5 +119,6 @@ class Stopwatch:
         self.running = False
         self.time = 0
         self.label.configure(text="00:00:00")
+
 
 show_start_screen()
