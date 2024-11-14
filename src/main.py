@@ -1,5 +1,4 @@
-from gui import root, show_start_screen
-from exercise import Exercise
+import gui
 
 if __name__ == "__main__":
-    root.mainloop()
+    gui.root.mainloop()
