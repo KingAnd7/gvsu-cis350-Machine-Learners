@@ -95,6 +95,8 @@ class Stopwatch:
         self.root = root
         self.label = ctk.CTkLabel(root, text="00:00:00", font=("Helvetica", 48), fg_color="transparent")
         self.label.pack(pady=20)
+        self.x = 0
+        self.y = 0
 
         button_frame = ctk.CTkFrame(root, fg_color="transparent")
         button_frame.pack(pady=10)
@@ -110,6 +112,9 @@ class Stopwatch:
 
         self.interval_button = ctk.CTkButton(button_frame, text="Interval", command=self.interval)
         self.interval_button.pack(side=ctk.LEFT, padx=10)
+
+        self.interval_frame = ctk.CTkFrame(root, fg_color="gray14")
+        self.interval_frame.pack(pady=20, fill=tk.BOTH, expand=True)
 
     def update_timer(self):
         if self.running:
@@ -133,10 +138,19 @@ class Stopwatch:
         self.label.configure(text="00:00:00")
 
     def interval(self):
+        minutes, seconds = divmod(self.time, 60)
+        hours, minutes = divmod(minutes, 60)
         if self.running:
-            minutes, seconds = divmod(self.time, 60)
-            hours, minutes = divmod(minutes, 60)
-            print(f"{hours:02}:{minutes:02}:{seconds:02}")
-
+            if self.y % 2 == 0:
+                self.y = self.y % 2
+                label1 = ctk.CTkLabel(self.interval_frame, text=f"{hours:02}:{minutes:02}:{seconds:02}", font=("Helvetica", 12), fg_color="transparent")
+                label1.grid(row=self.x, column=self.y, padx=5, pady=5)
+                self.x += 1
+                self.y += 1
+        # else:
+        #     self.running = True
+        #     self.update_timer()
+        #     self.label1 = ctk.CTkLabel(self.interval_frame, text=f"{hours:02}:{minutes:02}:{seconds:02}", font=("Helvetica", 12), fg_color="transparent")
+        #     self.label1.(pady=10, fill=ctk.BOTH, expand=True)
 
 show_start_screen()
