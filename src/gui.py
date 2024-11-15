@@ -4,7 +4,7 @@ import time
 import customtkinter as ctk
 
 root = ctk.CTk()
-root.title("Workout Program")
+root.title("Rep Nation Workout Program")
 ctk.set_default_color_theme("dark-blue")
 root.geometry("800x600")
 
@@ -36,6 +36,11 @@ def show_start_screen():
 def proceed_to_main():
     start_frame.pack_forget()
     show_workout(content_frame)
+
+def show_instructions(frame):
+    for widget in frame.winfo_children():
+        widget.destroy()
+    instructions = Instructions(frame)
 
 
 def show_workout(frame):
@@ -73,12 +78,15 @@ def show_exercises(frame):
                                               font=("", 10))
             musclegroup2_label.pack(side="left", padx=10)
 
-
 class Workout:
     def __init__(self, root):
-        self.label = ctk.CTkLabel(root, text="Technology", fg_color="transparent")
+        self.label = ctk.CTkLabel(root, text="Workout (more coming soon...)", fg_color="transparent")
         self.label.pack(pady=20)
 
+class Instructions:
+    def __init__(self, root):
+        self.label = ctk.CTkLabel(root, text = 'Instructions (more coming soon...)', fg_color = 'transparent')
+        self.label.pack(pady=20)
 
 class Stopwatch:
     def __init__(self, root) -> None:

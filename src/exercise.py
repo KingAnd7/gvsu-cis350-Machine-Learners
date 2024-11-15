@@ -132,3 +132,189 @@ movements.append(sit_up)
 
 russian_twist = Exercise("Russian Twist", 0, 0, "Core", "Obliques", "Sit on the floor, lean back slightly, and twist your torso side to side while holding a weight or medicine ball.")
 movements.append(russian_twist)
+# Assuming `Exercise` is already defined, and `movements` list is initialized
+
+# Upper Body Exercises
+push_up = Exercise("Push-Up", 0, 0, "Chest", "Triceps, Front Deltoids", "Start in a plank position and lower your chest to the ground, then push back up.")
+movements.append(push_up)
+
+close_grip_bench_press = Exercise("Close-Grip Bench Press", 0, 0, "Triceps", "Chest, Front Deltoids", "Perform a bench press with a narrow grip to target the triceps.")
+movements.append(close_grip_bench_press)
+
+pec_dec_fly = Exercise("Pec Dec Fly", 0, 0, "Chest", "Front Deltoids", "Sit at a pec dec machine and bring your arms together in front of your chest.")
+movements.append(pec_dec_fly)
+
+reverse_grip_pull_down = Exercise("Reverse Grip Pull Down", 0, 0, "Back", "Biceps", "Sit at a lat pull-down machine with an underhand grip and pull the bar to your chest.")
+movements.append(reverse_grip_pull_down)
+
+seated_row = Exercise("Seated Row", 0, 0, "Back", "Biceps, Rear Deltoids", "Sit at a cable row machine and pull the handles toward your torso while keeping your back straight.")
+movements.append(seated_row)
+
+t_bar_row = Exercise("T-Bar Row", 0, 0, "Back", "Biceps", "Stand with a T-bar handle and pull the weight toward your torso.")
+movements.append(t_bar_row)
+
+shrug = Exercise("Barbell Shrug", 0, 0, "Traps", "", "Hold a barbell with arms at your sides and shrug your shoulders upward.")
+movements.append(shrug)
+
+rear_delt_fly = Exercise("Rear Delt Fly", 0, 0, "Shoulders", "Rear Deltoids", "Bend over with dumbbells and raise your arms to the sides to target the rear deltoids.")
+movements.append(rear_delt_fly)
+
+arnold_press = Exercise("Arnold Press", 0, 0, "Shoulders", "Triceps", "Begin with dumbbells at shoulder height and rotate your arms as you press them overhead.")
+movements.append(arnold_press)
+
+overhead_tricep_extension = Exercise("Overhead Tricep Extension", 0, 0, "Triceps", "", "Hold a dumbbell or bar overhead and lower it behind your head, then extend your arms to press back up.")
+movements.append(overhead_tricep_extension)
+
+# Lower Body Exercises
+goblet_squat = Exercise("Goblet Squat", 0, 0, "Quads", "Glutes", "Hold a dumbbell close to your chest and perform a squat.")
+movements.append(goblet_squat)
+
+bulgarian_split_squat = Exercise("Bulgarian Split Squat", 0, 0, "Quads", "Glutes, Hamstrings", "Place one foot on a bench behind you and lower into a squat on the standing leg.")
+movements.append(bulgarian_split_squat)
+
+glute_bridge = Exercise("Glute Bridge", 0, 0, "Glutes", "Hamstrings", "Lie on your back with knees bent and lift your hips by squeezing the glutes.")
+movements.append(glute_bridge)
+
+hip_thrust = Exercise("Hip Thrust", 0, 0, "Glutes", "Hamstrings, Quads", "Sit with your upper back on a bench, place a barbell on your hips, and thrust them upward.")
+movements.append(hip_thrust)
+
+leg_extension = Exercise("Leg Extension", 0, 0, "Quads", "", "Sit on a leg extension machine and extend your knees to lift the weight.")
+movements.append(leg_extension)
+
+lying_leg_curl = Exercise("Lying Leg Curl", 0, 0, "Hamstrings", "", "Lie face down on a leg curl machine and curl your legs up toward your glutes.")
+movements.append(lying_leg_curl)
+
+standing_calf_raise = Exercise("Standing Calf Raise", 0, 0, "Calves", "", "Stand on a calf raise machine or platform and lift your heels off the ground.")
+movements.append(standing_calf_raise)
+
+seated_calf_raise = Exercise("Seated Calf Raise", 0, 0, "Calves", "", "Sit at a calf raise machine and raise your heels by pressing through the balls of your feet.")
+movements.append(seated_calf_raise)
+
+# Core Exercises
+leg_raise = Exercise("Leg Raise", 0, 0, "Core", "Hip Flexors", "Lie on your back and lift your legs to 90 degrees, then lower them without touching the floor.")
+movements.append(leg_raise)
+
+mountain_climbers = Exercise("Mountain Climbers", 0, 0, "Core", "Shoulders, Hip Flexors", "Start in a plank position and alternate driving your knees toward your chest.")
+movements.append(mountain_climbers)
+
+hanging_leg_raise = Exercise("Hanging Leg Raise", 0, 0, "Core", "Hip Flexors", "Hang from a bar and lift your legs until they are parallel to the ground, then lower.")
+movements.append(hanging_leg_raise)
+
+bicycle_crunch = Exercise("Bicycle Crunch", 0, 0, "Core", "Obliques", "Lie on your back, bring one knee toward the opposite elbow, and alternate sides in a pedaling motion.")
+movements.append(bicycle_crunch)
+
+# Additional Movements
+kettlebell_swing = Exercise("Kettlebell Swing", 0, 0, "Glutes", "Hamstrings, Core", "Hold a kettlebell with both hands and swing it forward using a hip hinge motion.")
+movements.append(kettlebell_swing)
+
+farmer_walk = Exercise("Farmer's Walk", 0, 0, "Core", "Forearms, Shoulders", "Hold a weight in each hand and walk a specified distance while keeping your core tight.")
+movements.append(farmer_walk)
+
+sled_push = Exercise("Sled Push", 0, 0, "Legs", "Glutes, Core", "Push a weighted sled forward over a specified distance.")
+movements.append(sled_push)
+
+landmine_press = Exercise("Landmine Press", 0, 0, "Shoulders", "Chest, Triceps", "Hold a barbell anchored on the floor and press it forward in a standing or kneeling position.")
+movements.append(landmine_press)
+
+# Olympic Lifts
+power_clean = Exercise("Power Clean", 0, 0, "Full Body", "Quads, Glutes, Back", "Lift a barbell from the ground to shoulder height in one explosive movement.")
+movements.append(power_clean)
+
+clean_and_jerk = Exercise("Clean and Jerk", 0, 0, "Full Body", "Quads, Glutes, Shoulders", "Lift a barbell from the ground to overhead in two movements: clean and jerk.")
+movements.append(clean_and_jerk)
+
+snatch = Exercise("Snatch", 0, 0, "Full Body", "Quads, Glutes, Shoulders", "Lift a barbell from the ground to overhead in one continuous motion.")
+movements.append(snatch)
+
+# Cardiovascular and Conditioning
+burpee = Exercise("Burpee", 0, 0, "Full Body", "Core, Legs, Shoulders", "Start standing, drop into a push-up, then jump back up to a standing position.")
+movements.append(burpee)
+
+jump_rope = Exercise("Jump Rope", 0, 0, "Cardio", "Calves, Shoulders", "Jump over a rope while rotating it with your wrists.")
+movements.append(jump_rope)
+
+box_jump = Exercise("Box Jump", 0, 0, "Quads", "Glutes, Calves", "Jump from the ground onto a raised platform, then step down.")
+movements.append(box_jump)
+# Chest
+decline_bench_press = Exercise("Decline Bench Press", 0, 0, "Chest", "Triceps, Front Deltoids", "Lie on a decline bench, grip the barbell, and press it from your chest to arms fully extended.")
+movements.append(decline_bench_press)
+
+machine_chest_fly = Exercise("Machine Chest Fly", 0, 0, "Chest", "Front Deltoids", "Sit on a chest fly machine, bring handles together in front of your chest, then slowly return.")
+movements.append(machine_chest_fly)
+
+# Back
+single_arm_lat_pull_down = Exercise("Single Arm Lat Pull Down", 0, 0, "Back", "Biceps", "Sit at a lat pull-down machine with one handle, pull it down to your chest with one arm.")
+movements.append(single_arm_lat_pull_down)
+
+reverse_fly = Exercise("Reverse Fly", 0, 0, "Back", "Rear Deltoids", "Bend over or use a reverse fly machine to pull dumbbells or handles outward to target rear delts and upper back.")
+movements.append(reverse_fly)
+
+# Shoulders
+upright_row = Exercise("Upright Row", 0, 0, "Shoulders", "Traps", "Hold a barbell or dumbbells and pull them up to shoulder height, leading with your elbows.")
+movements.append(upright_row)
+
+scaption = Exercise("Scaption", 0, 0, "Shoulders", "", "Hold dumbbells with palms facing each other, raise arms at a 45-degree angle to shoulder height.")
+movements.append(scaption)
+
+# Triceps
+kickback = Exercise("Tricep Kickback", 0, 0, "Triceps", "", "Bend over with a dumbbell in one hand, extend your arm back to engage the triceps.")
+movements.append(kickback)
+
+close_grip_push_up = Exercise("Close Grip Push-Up", 0, 0, "Triceps", "Chest", "Perform a push-up with hands close together to target the triceps.")
+movements.append(close_grip_push_up)
+
+# Biceps
+concentration_curl = Exercise("Concentration Curl", 0, 0, "Biceps", "", "Sit on a bench, brace your elbow on your inner thigh, and curl a dumbbell toward your shoulder.")
+movements.append(concentration_curl)
+
+incline_dumbbell_curl = Exercise("Incline Dumbbell Curl", 0, 0, "Biceps", "", "Sit on an incline bench, let arms hang down, and curl dumbbells up to shoulder height.")
+movements.append(incline_dumbbell_curl)
+
+# Legs (Quads, Hamstrings, Glutes)
+step_up = Exercise("Step-Up", 0, 0, "Quads", "Glutes, Hamstrings", "Step onto a raised platform with one leg, then bring the other leg up to meet it.")
+movements.append(step_up)
+
+pistol_squat = Exercise("Pistol Squat", 0, 0, "Quads", "Glutes", "Perform a squat on one leg while the other leg extends straight out in front of you.")
+movements.append(pistol_squat)
+
+good_morning = Exercise("Good Morning", 0, 0, "Hamstrings", "Lower Back, Glutes", "Stand with a barbell on your upper back, hinge at the hips, and lower your torso forward.")
+movements.append(good_morning)
+
+glute_kickback = Exercise("Glute Kickback", 0, 0, "Glutes", "Hamstrings", "On all fours or using a cable machine, kick one leg back and up to target the glutes.")
+movements.append(glute_kickback)
+
+# Core
+hanging_knee_raise = Exercise("Hanging Knee Raise", 0, 0, "Core", "Hip Flexors", "Hang from a bar and lift your knees up toward your chest.")
+movements.append(hanging_knee_raise)
+
+side_plank = Exercise("Side Plank", 0, 0, "Core", "Obliques", "Lie on your side with legs stacked, prop yourself up on one elbow, and hold.")
+movements.append(side_plank)
+
+cable_crunch = Exercise("Cable Crunch", 0, 0, "Core", "", "Kneel with a cable behind your head and crunch down to engage the abs.")
+movements.append(cable_crunch)
+
+ab_rollout = Exercise("Ab Rollout", 0, 0, "Core", "", "Using an ab wheel or barbell, roll out forward while keeping your core tight, then roll back.")
+movements.append(ab_rollout)
+
+# Additional Conditioning and Full-Body Movements
+medicine_ball_slam = Exercise("Medicine Ball Slam", 0, 0, "Full Body", "Core, Shoulders", "Raise a medicine ball overhead and slam it down to the ground with force.")
+movements.append(medicine_ball_slam)
+
+battle_rope_wave = Exercise("Battle Rope Wave", 0, 0, "Full Body", "Core, Shoulders", "Grip the ends of battle ropes and create waves by moving your arms up and down.")
+movements.append(battle_rope_wave)
+
+tire_flip = Exercise("Tire Flip", 0, 0, "Full Body", "Legs, Back", "Lift a large tire from the ground, using your legs and back, and flip it forward.")
+movements.append(tire_flip)
+
+sledgehammer_swing = Exercise("Sledgehammer Swing", 0, 0, "Full Body", "Core, Shoulders", "Swing a sledgehammer down onto a tire, alternating sides for a balanced workout.")
+movements.append(sledgehammer_swing)
+
+# Mobility and Stability Exercises
+face_down_internal_rotation = Exercise("Face-Down Internal Rotation", 0, 0, "Rotator Cuff", "", "Lie face down, arms at 90 degrees, and rotate them inward to target the rotator cuff.")
+movements.append(face_down_internal_rotation)
+
+bird_dog = Exercise("Bird Dog", 0, 0, "Core", "Lower Back, Glutes", "Start on all fours, extend one arm and the opposite leg, hold, then switch sides.")
+movements.append(bird_dog)
+
+pallof_press = Exercise("Pallof Press", 0, 0, "Core", "Obliques", "Stand sideways to a cable machine, hold the handle at chest level, and press straight out to resist rotation.")
+movements.append(pallof_press)
