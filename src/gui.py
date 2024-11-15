@@ -151,10 +151,18 @@ class Stopwatch:
                 label1.grid(row=self.x, column=self.y, padx=5, pady=5)
                 self.x += 1
                 self.y += 1
-        # else:
-        #     self.running = True
-        #     self.update_timer()
-        #     self.label1 = ctk.CTkLabel(self.interval_frame, text=f"{hours:02}:{minutes:02}:{seconds:02}", font=("Helvetica", 12), fg_color="transparent")
-        #     self.label1.(pady=10, fill=ctk.BOTH, expand=True)
+        else:
+            self.running = True
+            self.update_timer()
+            if self.y % 2 == 0:
+                self.y = self.y % 2
+                label1 = ctk.CTkLabel(self.interval_frame, text=f"{hours:02}:{minutes:02}:{seconds:02}", font=("Helvetica", 12), fg_color="transparent")
+                label1.grid(row=self.x, column=self.y, padx=5, pady=5)
+                self.y += 1
+            else:
+                label1 = ctk.CTkLabel(self.interval_frame, text=f"{hours:02}:{minutes:02}:{seconds:02}", font=("Helvetica", 12), fg_color="transparent")
+                label1.grid(row=self.x, column=self.y, padx=5, pady=5)
+                self.x += 1
+                self.y += 1
 
 show_start_screen()
