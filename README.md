@@ -12,4 +12,7 @@ A cool, very on fleek, dapper exercise desktop program. The exercise program wil
 Users must have a membership subscription to RepSquad. This shows loyalty to the RepNation-the most elite group of people who exercise.
 
 ## Run Instructions
-TBA
+Fork repository, then clone it into your machine.
+Open terminal, go to file directory of repository.
+Go to src directory.
+Type "python3 main.py".
