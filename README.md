@@ -4,12 +4,12 @@ A cool, very on fleek, dapper exercise desktop program. The exercise program wil
 
 ## Team Members and Roles
 
-* [Andrew Hills](https://github.com/KingAnd7/CIS350-HW2-Hills) (Leader, coder, Project Developer, Amatuer weightlifter)
-* [Preston Thomas](https://github.com/preston-thomas/CIS350-HW2-Thomas) (Project Manager, coder, Project Developer, Professional weightligheter, documenter proof-reader)
-* [Chai Callow](https://github.com/callchai/CIS350-HW2-Callow) (Documenter, coder, Project Developer)
+* [Andrew Hills](https://github.com/KingAnd7/CIS350-HW2-Hills) (Leader, coder, project developer, amateur weightlifter)
+* [Preston Thomas](https://github.com/preston-thomas/CIS350-HW2-Thomas) (Project manager, coder, project developer, professional weightlifter, documenter proof-reader)
+* [Chai Callow](https://github.com/callchai/CIS350-HW2-Callow) (Documenter, coder, project developer)
 
 ## Prerequisites
-Users must have a membership subscription to RepSquad. This shows loyalty to the RepNation-the most elite group of people who exercise.
+Users must have a working installation of Python on their machine.
 
 ## Run Instructions
 Fork repository, then clone it into your machine.
