@@ -51,23 +51,21 @@ class ExerciseDisplay:
     def filter_exercises(self) -> None:
         """
         Filters the exercises based on the search term (name or muscle group).
+        It is not case sensitive.
 
         :return:    None
         """
         search_term = self.search_entry.get()
 
-        # Clear the previous displayed exercises
         for widget in self.scrollable_frame.winfo_children():
             widget.destroy()
 
         filtered_exercises = []
         for exercise in movements:
-            # Looks for search term and filters results. It is case-insensitive.
             exercise_name = exercise.get_name().lower()
             muscle_group1 = exercise.get_muscle_group1().lower() if exercise.get_muscle_group1() else ""
             muscle_group2 = exercise.get_muscle_group2().lower() if exercise.get_muscle_group2() else ""
 
-            # Check if the search term is in the exercise name or either muscle group
             if search_term.lower() in exercise_name or search_term.lower() in muscle_group1 or search_term.lower() in muscle_group2:
                 filtered_exercises.append(exercise)
 
@@ -75,24 +73,26 @@ class ExerciseDisplay:
 
     def display_exercises(self, exercises) -> None:
         """
-        Displays the exercises in the scrollable frame.
+        Displays the exercises in the window. This is usually called at the end of most of the
+        other functions in the ExerciseDisplay class.
 
-        :param exercises: List of exercises to display.
-        :return:          None
+        :param exercises:   List of exercises to display.
+        :return:            None
         """
+        # This loop creates the window.
+        # It also adds a border color around the exercises to help differentiate them from each other.
         for exercise in exercises:
-            # Create a frame for each exercise with a border
             exercise_frame = ctk.CTkFrame(self.scrollable_frame, 
                                           fg_color="gray14", 
-                                          border_width=2,  # Add a border width
-                                          border_color="gray")  # Choose the border color
+                                          border_width=2,
+                                          border_color="gray")
             exercise_frame.pack(pady=15, fill="x", anchor="w")
 
-            # Name of the exercise (this will be at the top)
+            # Name of the exercise (this will be at the top to make it more neat IMO).
             name_label = ctk.CTkLabel(exercise_frame, text=exercise.get_name(), font=("Helvetica", 25), anchor="w")
             name_label.pack(side="top", padx=15, pady=5, anchor="w")
 
-            # Primary muscle group
+            # This prints the primary muscle group below the name in a smaller font.
             musclegroup1_label = ctk.CTkLabel(exercise_frame, text=f"Primary muscle group: {exercise.get_muscle_group1()}", font=("", 15), anchor="w")
             musclegroup1_label.pack(side="top", padx=15, pady=3, anchor="w") 
 
@@ -101,29 +101,37 @@ class ExerciseDisplay:
                 musclegroup2_label = ctk.CTkLabel(exercise_frame, text=f"Secondary muscle group: {exercise.get_muscle_group2()}", font=("", 15), anchor="w")
                 musclegroup2_label.pack(side="top", padx=15, pady=3, anchor="w")
 
-            # Create a frame to hold the "View" button at the bottom-right of the exercise frame
+            # Equipment Info (if any)
+            equipment = exercise.get_equipment_required()
+            if equipment and equipment != "None": 
+                equipment_label = ctk.CTkLabel(exercise_frame, text=f"Equipment: {equipment}", font=("", 12, "italic"), anchor="w")
+                equipment_label.pack(side="top", padx=15, pady=3, anchor="w")
+            else:
+                equipment_label = ctk.CTkLabel(exercise_frame, text="No equipment required", font=("", 12, "italic"), anchor="w")
+                equipment_label.pack(side="top", padx=15, pady=3, anchor="w")
+
+            # Adds view button for the open_exercise_window function.
             button_frame = ctk.CTkFrame(exercise_frame, fg_color="transparent")
             button_frame.pack(side="bottom", fill="x", padx=15, pady=10)
 
-            # Add the "View" button inside the button frame and align it to the right
+            # Moves the button to be near the bottom left of each exercise box.
             view_button = ctk.CTkButton(button_frame, text="View", command=lambda ex=exercise: self.open_exercise_window(ex))
             view_button.pack(side="right", padx=10)
-
-
-
     def open_exercise_window(self, exercise) -> None:
         """
-        Opens a new window with the detailed information of the selected exercise.
+        Opens a window with more information when the 'view' button is clicked.
+        This is where the user can see more information for each exercise.
         
-        :param exercise: The exercise object whose details are to be shown.
-        :return:         None
+        :param exercise:    The exercise to be viewed more.
+        :return:            None
         """
-        # Create a new window
-        exercise_window = ctk.CTkToplevel(self.parent_frame)
-        exercise_window.title(f"{exercise.get_name()}")  # Window title update
-        exercise_window.geometry("800x600")
 
-        # Add labels to display exercise details with left alignment
+        # Create a new window. The window name defaults to the name of the exercise.
+        exercise_window = ctk.CTkToplevel(self.parent_frame)
+        exercise_window.title(f"{exercise.get_name()}")
+        exercise_window.geometry("850x600")
+
+        # Left aligns the text because that looks the neatest.
         name_label = ctk.CTkLabel(exercise_window, text=f"Quick Summary for {exercise.get_name()}", font=("Helvetica", 30), anchor="w")
         name_label.pack(pady=10, padx=15, anchor="w")
 
@@ -134,15 +142,25 @@ class ExerciseDisplay:
             musclegroup2_label = ctk.CTkLabel(exercise_window, text=f"Secondary Muscle Group: {exercise.get_muscle_group2()}", font=("", 20), anchor="w")
             musclegroup2_label.pack(pady=5, padx=15, anchor="w")
 
-        # Add the Summary section
+        # Add the summary title and summary from exercise.py
         summary_label = ctk.CTkLabel(exercise_window, text="How to:", font=("Helvetica", 25, "bold"), anchor="w")
         summary_label.pack(pady=10, padx=15, anchor="w")
 
-        # Add the summary text in a label (word wrapping enabled)
+        # Adds the literal summary from exercise.py. A little thing I did was make it wrap if the summary is too long.
         summary_text = exercise.get_summary()
         summary_text_label = ctk.CTkLabel(exercise_window, text=summary_text, font=("", 14), anchor="w", wraplength=750)
         summary_text_label.pack(padx=15, pady=10, anchor="w")
 
-        # Add the Close button, positioned at the bottom-right
+        # Equipment Info (if any)
+        equipment = exercise.get_equipment_required()
+        if equipment and equipment != "None":
+            equipment_label = ctk.CTkLabel(exercise_window, text=f"Required Equipment:\n-{equipment}", font=("", 18, "italic"), anchor="e")
+            equipment_label.pack(pady=5, padx=15, anchor="w")
+        else:
+            equipment_label = ctk.CTkLabel(exercise_window, text="No equipment required", font=("", 18, "italic"), anchor="w")
+            equipment_label.pack(pady=5, padx=15, anchor="w")
+
+        # Close button
         close_button = ctk.CTkButton(exercise_window, text="Close", command=exercise_window.destroy)
-        close_button.pack(side="bottom", anchor="e", padx=15, pady=20)  # Positioned to the right of the window
+        close_button.pack(side="bottom", anchor="e", padx=15, pady=20)
+
