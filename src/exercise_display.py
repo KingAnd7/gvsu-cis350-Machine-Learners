@@ -1,4 +1,4 @@
-from customtkinter import CTkTextbox
+from customtkinter import *
 from exercise import movements
 from tkinter import messagebox
 import customtkinter as ctk
@@ -199,7 +199,7 @@ class ExerciseDisplay:
             return
 
         # Create a popup window for selecting a workout
-        popup = tk.Toplevel()
+        popup = CTkToplevel()
         popup.title("Select Workout")
         popup.geometry("400x200")
 
@@ -207,7 +207,7 @@ class ExerciseDisplay:
         label.pack(pady=10)
 
         workout_names = [workout['name'] for workout in workouts]
-        selected_workout = tk.StringVar(popup)
+        selected_workout = ctk.StringVar(popup)
         selected_workout.set(workout_names[0])  # Default selection
 
         dropdown = tk.OptionMenu(popup, selected_workout, *workout_names)
