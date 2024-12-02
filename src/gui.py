@@ -182,6 +182,9 @@ class Stopwatch:
         self.interval_frame = ctk.CTkFrame(root, fg_color="gray14")
         self.interval_frame.pack(pady=20, fill=tk.BOTH, expand=True)
 
+        self.label1 = ctk.CTkLabel(root, text="interval timer")
+        self.label1.pack(pady=20)
+
     def update_timer(self):
         if self.running:
             self.time += 1
@@ -202,6 +205,7 @@ class Stopwatch:
         self.running = False
         self.time = 0
         self.label.configure(text="00:00:00")
+        self.label1.pack_forget()
 
     def interval(self):
         minutes, seconds = divmod(self.time, 60)
@@ -209,12 +213,12 @@ class Stopwatch:
         if self.running:
             if self.y % 2 == 0:
                 self.y = self.y % 2
-                label1 = ctk.CTkLabel(self.interval_frame, text=f"{hours:02}:{minutes:02}:{seconds:02}", font=("Helvetica", 12), fg_color="transparent")
-                label1.grid(row=self.x, column=self.y, padx=5, pady=5)
+                self.label1 = ctk.CTkLabel(self.interval_frame, text=f"{hours:02}:{minutes:02}:{seconds:02}", font=("Helvetica", 12), fg_color="transparent")
+                self.label1.grid(row=self.x, column=self.y, padx=5, pady=5)
                 self.y += 1
             else:
-                label1 = ctk.CTkLabel(self.interval_frame, text=f"{hours:02}:{minutes:02}:{seconds:02}", font=("Helvetica", 12), fg_color="transparent")
-                label1.grid(row=self.x, column=self.y, padx=5, pady=5)
+                self.label1 = ctk.CTkLabel(self.interval_frame, text=f"{hours:02}:{minutes:02}:{seconds:02}", font=("Helvetica", 12), fg_color="transparent")
+                self.label1.grid(row=self.x, column=self.y, padx=5, pady=5)
                 self.x += 1
                 self.y += 1
         else:
@@ -222,12 +226,12 @@ class Stopwatch:
             self.update_timer()
             if self.y % 2 == 0:
                 self.y = self.y % 2
-                label1 = ctk.CTkLabel(self.interval_frame, text=f"{hours:02}:{minutes:02}:{seconds:02}", font=("Helvetica", 12), fg_color="transparent")
-                label1.grid(row=self.x, column=self.y, padx=5, pady=5)
+                self.label1 = ctk.CTkLabel(self.interval_frame, text=f"{hours:02}:{minutes:02}:{seconds:02}", font=("Helvetica", 12), fg_color="transparent")
+                self.label1.grid(row=self.x, column=self.y, padx=5, pady=5)
                 self.y += 1
             else:
-                label1 = ctk.CTkLabel(self.interval_frame, text=f"{hours:02}:{minutes:02}:{seconds:02}", font=("Helvetica", 12), fg_color="transparent")
-                label1.grid(row=self.x, column=self.y, padx=5, pady=5)
+                self.label1 = ctk.CTkLabel(self.interval_frame, text=f"{hours:02}:{minutes:02}:{seconds:02}", font=("Helvetica", 12), fg_color="transparent")
+                self.label1.grid(row=self.x, column=self.y, padx=5, pady=5)
                 self.x += 1
                 self.y += 1
 
