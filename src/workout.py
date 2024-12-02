@@ -4,7 +4,7 @@ import os
 
 class Workout:
     """
-    The Workout clas controls the WORKOUT page in the program, where a user can
+    The Workout class controls the WORKOUT page in the program, where a user can
     create, edit, delete, and view their workouts they created.
     """
     def __init__(self, root) -> None:
@@ -22,7 +22,8 @@ class Workout:
         # Load saved workouts from .json file.
         self.load_workouts()
 
-        self.workout_list_frame = ctk.CTkFrame(self.root, fg_color="transparent")
+        # Scrollable frame for workouts list
+        self.workout_list_frame = ctk.CTkScrollableFrame(self.root, fg_color="transparent")
         self.workout_list_frame.pack(pady=20, fill="both", expand=True)
 
         self.button_frame = ctk.CTkFrame(self.root, fg_color="transparent")
@@ -64,8 +65,6 @@ class Workout:
         """
         Saves created workouts to the .json file called workouts.json. It is called
         usually after a user creates, edits, or deletes a workout.
-
-        This took me hours to figure out, thanks Diddy.
 
         :return:    None
         """
@@ -114,7 +113,7 @@ class Workout:
     def save_workout(self) -> None:
         """
         Literally saves the workout. It saves it to the JSON file as a dictionary entry.
-        It then refereshes the little create workout box upon finish.
+        It then refreshes the little create workout box upon finish.
 
         :return:    None
         """
@@ -146,25 +145,41 @@ class Workout:
 
         :return:    None
         """
+        # Clear any existing widgets
         for widget in self.workout_list_frame.winfo_children():
             widget.destroy()
 
+        # Iterate through all workouts and display them
         for index, workout in enumerate(self.workouts):
+            # Create a workout frame (the entire frame area is now clickable)
             workout_frame = ctk.CTkFrame(self.workout_list_frame, fg_color="lightblue", height=120, corner_radius=10)
             workout_frame.pack(fill="x", padx=10, pady=10)
 
+            # Workout name and description
             workout_name_label = ctk.CTkLabel(workout_frame, text=workout['name'], font=("Helvetica", 24, "bold"), text_color="black", anchor="w")
             workout_name_label.pack(side="top", fill="x", padx=10, pady=5)
 
             workout_description_label = ctk.CTkLabel(workout_frame, text=workout['description'], font=("Helvetica", 16), text_color="black", anchor="w")
             workout_description_label.pack(side="top", fill="x", padx=10, pady=5)
 
-            # Highlights a box pee yellow.
+            # Display exercises in this workout
+            if 'exercises' in workout:
+                exercises_label = ctk.CTkLabel(workout_frame, text="Exercises:", font=("Helvetica", 16, "italic"), text_color="black", anchor="w")
+                exercises_label.pack(side="top", padx=10, pady=5, anchor="w")
+
+                for exercise in workout['exercises']:
+                    exercise_label = ctk.CTkLabel(workout_frame, 
+                                                  text=f"- {exercise['name']}", 
+                                                  font=("Helvetica", 14), anchor="w", text_color="black")
+                    exercise_label.pack(side="top", padx=20, pady=0, anchor="w")
+
+            #Highlight the box in pee yellow when clicked
+            # there is sometimes a little delay in highlighting for some reason...
             workout_frame.bind("<Button-1>", lambda event, idx=index, frame=workout_frame: self.highlight_workout(event, idx, frame))
 
     def highlight_workout(self, event, idx, workout_frame) -> None:
         """
-        Highlights a selected workout box in pee pee yellow color.
+        Highlights a selected workout box in yellow color.
         Enables the edit and delete button as well.
 
         :param event:           The click event.
@@ -172,14 +187,19 @@ class Workout:
         :param workout_frame:   The frame box of the workout.
         :return:                None
         """
-        for widget in self.workout_list_frame.winfo_children():
-            widget.configure(fg_color="lightblue")
+        # If there was a previously highlighted workout, reset its color
+        if self.highlighted_workout_index is not None:
+            prev_workout_frame = self.workout_list_frame.winfo_children()[self.highlighted_workout_index]
+            prev_workout_frame.configure(fg_color="lightblue")
 
-        # Highlight the selected workout in the piss yellow.
+        # Highlight the selected workout in yellow
         workout_frame.configure(fg_color="yellow")
+
+        # Set the selected workout index
         self.highlighted_workout_index = idx
         self.delete_workout_button.configure(state="normal")
         self.edit_workout_button.configure(state="normal")
+
 
     def delete_highlighted_workout(self) -> None:
         """
@@ -206,8 +226,9 @@ class Workout:
             workout_to_edit = self.workouts[self.highlighted_workout_index]
             edit_window = ctk.CTkToplevel(self.root)
             edit_window.title("Edit Workout")
-            edit_window.geometry("400x300")
+            edit_window.geometry("600x400")
 
+            # Workout Details
             title_label = ctk.CTkLabel(edit_window, text="Workout Title:", font=("Helvetica", 20))
             title_label.pack(anchor="w", padx=20, pady=10)
 
@@ -222,20 +243,29 @@ class Workout:
             description_entry.insert(0, workout_to_edit['description'])
             description_entry.pack(fill="x", padx=20, pady=10)
 
-            def save_edits() -> None:
-                """
-                Saves the changes the user made when editing workout.
+            # Display Exercises in Workout
+            exercises_label = ctk.CTkLabel(edit_window, text="Exercises:", font=("Helvetica", 20))
+            exercises_label.pack(anchor="w", padx=20, pady=10)
 
-                :return:    None
+            exercises_frame = ctk.CTkFrame(edit_window, fg_color="transparent")
+            exercises_frame.pack(fill="both", padx=20, pady=10)
+
+            if 'exercises' in workout_to_edit:
+                for exercise in workout_to_edit['exercises']:
+                    exercise_label = ctk.CTkLabel(exercises_frame, text=f"- {exercise['name']} ({exercise['primary_muscle']})",
+                                                  font=("Helvetica", 16), anchor="w")
+                    exercise_label.pack(anchor="w", padx=10, pady=5)
+
+            # Save Changes Button
+            def save_edits():
+                """
+                Saves the changes the user made to their workouts.
                 """
                 workout_to_edit['name'] = name_entry.get()
                 workout_to_edit['description'] = description_entry.get()
-                self.save_workouts()  # Save the updated workouts list
+                self.save_workouts()
                 edit_window.destroy()
                 self.display_workouts()
 
-            # Creating the 'save changes' button and putting it in the bottom right.
-            button_frame = ctk.CTkFrame(edit_window, fg_color="transparent")
-            button_frame.pack(side="bottom", fill="x", padx=20, pady=10)
-            save_button = ctk.CTkButton(button_frame, text="Save Changes", command=save_edits)
-            save_button.pack(side="right")
+            save_button = ctk.CTkButton(edit_window, text="Save Changes", command=save_edits)
+            save_button.pack(side="bottom", anchor="e", padx=20, pady=20)

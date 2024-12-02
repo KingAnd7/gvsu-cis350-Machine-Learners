@@ -1,10 +1,15 @@
 from customtkinter import CTkTextbox
 from exercise import movements
+from tkinter import messagebox
 import customtkinter as ctk
+import tkinter as tk
+import os
+import json
 
 class ExerciseDisplay:
     """
-    The ExerciseDisplay class creates and operates the EXERCISES page.
+    The ExerciseDisplay class creates and operates the EXERCISES page. This is where
+    the user can search for exercises and add them to their workouts.
     """
     def __init__(self, parent_frame):
         """
@@ -76,6 +81,9 @@ class ExerciseDisplay:
         Displays the exercises in the window. This is usually called at the end of most of the
         other functions in the ExerciseDisplay class.
 
+        This also includes the 'add to workout' button, which the user clicks to add their
+        chosen exercise to a workout.
+
         :param exercises:   List of exercises to display.
         :return:            None
         """
@@ -101,7 +109,7 @@ class ExerciseDisplay:
                 musclegroup2_label = ctk.CTkLabel(exercise_frame, text=f"Secondary muscle group: {exercise.get_muscle_group2()}", font=("", 15), anchor="w")
                 musclegroup2_label.pack(side="top", padx=15, pady=3, anchor="w")
 
-            # Equipment Info (if any)
+            # Equipment Info (if any) It is displayed in tiny italicized font.
             equipment = exercise.get_equipment_required()
             if equipment and equipment != "None": 
                 equipment_label = ctk.CTkLabel(exercise_frame, text=f"Equipment: {equipment}", font=("", 12, "italic"), anchor="w")
@@ -117,6 +125,13 @@ class ExerciseDisplay:
             # Moves the button to be near the bottom left of each exercise box.
             view_button = ctk.CTkButton(button_frame, text="View", command=lambda ex=exercise: self.open_exercise_window(ex))
             view_button.pack(side="right", padx=10)
+
+
+            # Add a new button for adding to a workout
+            add_to_workout_button = ctk.CTkButton(button_frame, text="Add to Workout", 
+                                                  command=lambda ex=exercise: self.add_to_workout(ex))
+            add_to_workout_button.pack(side="right", padx=10)
+
     def open_exercise_window(self, exercise) -> None:
         """
         Opens a window with more information when the 'view' button is clicked.
@@ -163,3 +178,67 @@ class ExerciseDisplay:
         # Close button
         close_button = ctk.CTkButton(exercise_window, text="Close", command=exercise_window.destroy)
         close_button.pack(side="bottom", anchor="e", padx=15, pady=20)
+
+    def add_to_workout(self, exercise) -> None:
+        """
+        Prompts the user to choose a workout and adds the selected exercise to it.
+        A new window popup opens up upon the interaction.
+
+        :param exercise:    The exercise to add to a workout.
+        :return:            None
+        """
+
+        if os.path.exists("workouts.json"):
+            with open("workouts.json", "r") as file:
+                workouts = json.load(file)
+        else:
+            workouts = []
+
+        if not workouts:
+            messagebox.showinfo("No Workouts Found", "No workouts found. Please create a workout first. I bet you did not read the instructions. Idiot.")
+            return
+
+        # Create a popup window for selecting a workout
+        popup = tk.Toplevel()
+        popup.title("Select Workout")
+        popup.geometry("400x200")
+
+        label = ctk.CTkLabel(popup, text="Choose a workout:", font=("Helvetica", 16))
+        label.pack(pady=10)
+
+        workout_names = [workout['name'] for workout in workouts]
+        selected_workout = tk.StringVar(popup)
+        selected_workout.set(workout_names[0])  # Default selection
+
+        dropdown = tk.OptionMenu(popup, selected_workout, *workout_names)
+        dropdown.pack(pady=20)
+
+        def save_to_workout():
+            """
+            This funtion updates the .json file to also include the exercises the user added to their workout.
+            Thanks for helping me with figuring this out Diddy!!!
+            """
+            workout_name = selected_workout.get()
+            for workout in workouts:
+                if workout['name'] == workout_name:
+                    if 'exercises' not in workout:
+                        workout['exercises'] = []
+                    workout['exercises'].append({
+                        "name": exercise.get_name(),
+                        "primary_muscle": exercise.get_muscle_group1(),
+                        "secondary_muscle": exercise.get_muscle_group2(),
+                        "equipment": exercise.get_equipment_required(),
+                    })
+                    break
+            with open("workouts.json", "w") as file:
+                json.dump(workouts, file, indent=4)
+            popup.destroy()
+            messagebox.showinfo("Success", f"{exercise.get_name()} added to {workout_name}.")
+
+
+        save_button = ctk.CTkButton(popup, text="Add", command=save_to_workout)
+        save_button.pack(pady=10)
+
+        close_button = ctk.CTkButton(popup, text="Cancel", command=popup.destroy)
+        close_button.pack(pady=10)
+

@@ -1,6 +1,12 @@
 class Exercise:
+    """
+    The exercise class handles the list of exercises the user can add to their workouts.
+    """
     def __init__(self, name="None", sets=0, reps=0, muscle_group1="None", muscle_group2="None", summary='',
      equipment_required='None') -> None:
+        """
+        Initializer for the EXERCISE class.
+        """
         self.name = name
         self.sets = sets
         self.reps = reps
