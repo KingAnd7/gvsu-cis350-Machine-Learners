@@ -175,6 +175,7 @@ class Workout:
         for widget in self.workout_list_frame.winfo_children():
             widget.configure(fg_color="lightblue")
 
+        # Highlight the selected workout in the piss yellow.
         workout_frame.configure(fg_color="yellow")
         self.highlighted_workout_index = idx
         self.delete_workout_button.configure(state="normal")

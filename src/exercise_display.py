@@ -163,4 +163,3 @@ class ExerciseDisplay:
         # Close button
         close_button = ctk.CTkButton(exercise_window, text="Close", command=exercise_window.destroy)
         close_button.pack(side="bottom", anchor="e", padx=15, pady=20)
-

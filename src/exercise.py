@@ -325,4 +325,3 @@ movements.append(bird_dog)
 
 pallof_press = Exercise("Pallof Press", 0, 0, "Core", "Obliques", "Stand sideways to a cable machine, hold the handle at chest level, and press straight out to resist rotation.", "Cable Machine")
 movements.append(pallof_press)
-
