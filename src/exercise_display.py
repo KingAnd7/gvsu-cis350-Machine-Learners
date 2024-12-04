@@ -201,22 +201,27 @@ class ExerciseDisplay:
         # Create a popup window for selecting a workout
         popup = CTkToplevel()
         popup.title("Select Workout")
-        popup.geometry("400x200")
+        popup.geometry("600x400")
+
+        # Configure grid layout to stretch and adapt
+        popup.grid_columnconfigure(0, weight=1)
+        popup.grid_rowconfigure(0, weight=0)
+        popup.grid_rowconfigure(1, weight=1)
+        popup.grid_rowconfigure(2, weight=0)
 
         label = ctk.CTkLabel(popup, text="Choose a workout:", font=("Helvetica", 16))
-        label.pack(pady=10)
+        label.grid(row=0, column=0, padx=20, pady=10, sticky="w")
 
         workout_names = [workout['name'] for workout in workouts]
         selected_workout = ctk.StringVar(popup)
         selected_workout.set(workout_names[0])  # Default selection
 
         dropdown = tk.OptionMenu(popup, selected_workout, *workout_names)
-        dropdown.pack(pady=20)
+        dropdown.grid(row=1, column=0, padx=20, pady=20, sticky="ew")
 
         def save_to_workout():
             """
-            This funtion updates the .json file to also include the exercises the user added to their workout.
-            Thanks for helping me with figuring this out Diddy!!!
+            This function updates the .json file to also include the exercises the user added to their workout.
             """
             workout_name = selected_workout.get()
             for workout in workouts:
@@ -235,10 +240,8 @@ class ExerciseDisplay:
             popup.destroy()
             messagebox.showinfo("Success", f"{exercise.get_name()} added to {workout_name}.")
 
-
         save_button = ctk.CTkButton(popup, text="Add", command=save_to_workout)
-        save_button.pack(pady=10)
+        save_button.grid(row=2, column=0, padx=20, pady=10, sticky="ew")
 
         close_button = ctk.CTkButton(popup, text="Cancel", command=popup.destroy)
-        close_button.pack(pady=10)
-
+        close_button.grid(row=3, column=0, padx=20, pady=10, sticky="ew")
