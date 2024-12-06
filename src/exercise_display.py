@@ -1,6 +1,7 @@
 from customtkinter import *
 from exercise import movements
 from tkinter import messagebox
+from tkinter import Text
 import customtkinter as ctk
 import tkinter as tk
 import os
@@ -136,7 +137,7 @@ class ExerciseDisplay:
         """
         Opens a window with more information when the 'view' button is clicked.
         This is where the user can see more information for each exercise.
-        
+
         :param exercise:    The exercise to be viewed more.
         :return:            None
         """
@@ -146,38 +147,42 @@ class ExerciseDisplay:
         exercise_window.title(f"{exercise.get_name()}")
         exercise_window.geometry("850x600")
 
-        # Left aligns the text because that looks the neatest.
-        name_label = ctk.CTkLabel(exercise_window, text=f"Quick Summary for {exercise.get_name()}", font=("Helvetica", 30), anchor="w")
-        name_label.pack(pady=10, padx=15, anchor="w")
+        # Create Text widget for rich text formatting
+        text_widget = Text(exercise_window, wrap='word', font=("Arial", 16), height=30, width=100)
+        text_widget.pack(pady=20, padx=20)
 
-        musclegroup1_label = ctk.CTkLabel(exercise_window, text=f"Primary Muscle Group: {exercise.get_muscle_group1()}", font=("", 20), anchor="w")
-        musclegroup1_label.pack(pady=5, padx=15, anchor="w")
+        # Disable user editing
+        text_widget.configure(state="normal")
 
+        # Create tags for styling (e.g., bold, italic, headers)
+        text_widget.tag_configure("header", font=("Arial", 20, "bold"))
+        text_widget.tag_configure("subheader", font=("Arial", 18, "bold"))
+        text_widget.tag_configure("normal", font=("Arial", 16))
+        text_widget.tag_configure("italic", font=("Arial", 16, "italic"))
+
+        # Insert content with formatting
+        text_widget.insert("end", f"{exercise.get_name()}\n\n", "header")
+        text_widget.insert("end", f"Primary Muscle Group: {exercise.get_muscle_group1()}\n", "normal")
         if exercise.get_muscle_group2():
-            musclegroup2_label = ctk.CTkLabel(exercise_window, text=f"Secondary Muscle Group: {exercise.get_muscle_group2()}", font=("", 20), anchor="w")
-            musclegroup2_label.pack(pady=5, padx=15, anchor="w")
+            text_widget.insert("end", f"Secondary Muscle Group: {exercise.get_muscle_group2()}\n", "normal")
+        text_widget.insert("end", "\n")
 
-        # Add the summary title and summary from exercise.py
-        summary_label = ctk.CTkLabel(exercise_window, text="How to:", font=("Helvetica", 25, "bold"), anchor="w")
-        summary_label.pack(pady=10, padx=15, anchor="w")
+        text_widget.insert("end", "How to:\n", "subheader")
+        text_widget.insert("end", f"{exercise.get_summary()}\n\n", "normal")
 
-        # Adds the literal summary from exercise.py. A little thing I did was make it wrap if the summary is too long.
-        summary_text = exercise.get_summary()
-        summary_text_label = ctk.CTkLabel(exercise_window, text=summary_text, font=("", 14), anchor="w", wraplength=750)
-        summary_text_label.pack(padx=15, pady=10, anchor="w")
-
-        # Equipment Info (if any)
         equipment = exercise.get_equipment_required()
         if equipment and equipment != "None":
-            equipment_label = ctk.CTkLabel(exercise_window, text=f"Required Equipment:\n-{equipment}", font=("", 18, "italic"), anchor="e")
-            equipment_label.pack(pady=5, padx=15, anchor="w")
+            text_widget.insert("end", "Required Equipment:\n", "subheader")
+            text_widget.insert("end", f"- {equipment}\n", "italic")
         else:
-            equipment_label = ctk.CTkLabel(exercise_window, text="No equipment required", font=("", 18, "italic"), anchor="w")
-            equipment_label.pack(pady=5, padx=15, anchor="w")
+            text_widget.insert("end", "No equipment required\n", "italic")
 
-        # Close button
+        # Disable the text widget to make it read-only
+        text_widget.configure(state="disabled")
+
+        # Add a close button at the bottom
         close_button = ctk.CTkButton(exercise_window, text="Close", command=exercise_window.destroy)
-        close_button.pack(side="bottom", anchor="e", padx=15, pady=20)
+        close_button.pack(side="bottom", padx=15, pady=20)
 
     def add_to_workout(self, exercise) -> None:
         """
@@ -216,7 +221,15 @@ class ExerciseDisplay:
         selected_workout = ctk.StringVar(popup)
         selected_workout.set(workout_names[0])  # Default selection
 
-        dropdown = tk.OptionMenu(popup, selected_workout, *workout_names)
+        dropdown = tk.OptionMenu(
+            popup, 
+            selected_workout, 
+            *workout_names
+        )
+        dropdown.config(
+            font=("Helvetica", 24),  
+            width=100                 
+        )
         dropdown.grid(row=1, column=0, padx=20, pady=20, sticky="ew")
 
         def save_to_workout():

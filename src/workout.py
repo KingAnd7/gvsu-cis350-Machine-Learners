@@ -2,6 +2,8 @@ import customtkinter as ctk
 import json
 import os
 import datetime
+from functools import partial
+
 
 class Workout:
     """
@@ -378,9 +380,6 @@ class Workout:
             description_entry.insert(0, workout_to_edit['description'])
             description_entry.grid(row=3, column=0, padx=20, pady=10, columnspan=3, sticky="ew")
 
-            days_header = ctk.CTkLabel(form_frame, text="DAYS", font=("Helvetica", 18, "bold"))
-            days_header.grid(row=4, column=0, padx=20, pady=10, sticky="w")
-
             # Days selection (Checkboxes)
             self.days_var_edit = {day: ctk.BooleanVar() for day in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]}
             days_frame_edit = ctk.CTkFrame(form_frame, fg_color="transparent")
@@ -426,7 +425,6 @@ class Workout:
             exercises_frame.grid_columnconfigure(3, weight=0)  # For the delete button
 
             exercise_inputs = []
-
             if 'exercises' in workout_to_edit:
                 for idx, exercise in enumerate(workout_to_edit['exercises']):
                     # Exercise Name
@@ -443,16 +441,21 @@ class Workout:
                     reps_entry.insert(0, exercise.get('reps', ''))
                     reps_entry.grid(row=idx, column=2, padx=10, pady=5, sticky="ew")
 
-                    # Delete Button
-                    delete_button = ctk.CTkButton(exercises_frame, text="Delete", fg_color="red", font=("Helvetica", 12),
-                                                command=lambda idx=idx: self.delete_exercise(workout_to_edit, idx))
+                    # Create the delete button AFTER defining the exercise-related UI elements
+                    delete_button = ctk.CTkButton(exercises_frame, text="Delete", fg_color="red", font=("Helvetica", 12))
+
+                    # Now assign the delete button to the callback
+                    delete_button.configure(command=partial(self.delete_exercise, workout_to_edit, idx, exercise_name_label, sets_entry, reps_entry, delete_button))
+                    
                     delete_button.grid(row=idx, column=3, padx=10, pady=5)
 
+                    # Add exercise data to exercise_inputs for later saving
                     exercise_inputs.append({
                         'exercise': exercise,
                         'sets_entry': sets_entry,
                         'reps_entry': reps_entry
                     })
+
 
 
             def save_edits():
@@ -489,22 +492,46 @@ class Workout:
             discard_button.pack(pady=10, padx=20, fill="x")
 
 
-    def delete_exercise(self, workout_to_edit, idx):
+    def delete_exercise(self, workout_to_edit, idx, exercise_name_label, sets_entry, reps_entry, delete_button):
         """
         Deletes an exercise from the workout's exercise list.
-
-        :param workout_to_edit: The workout that is being edited.
-        :param idx: The index of the exercise to delete.
-        :return: None
+        Removes the UI elements immediately.
         """
-        # Remove the exercise from the list
         del workout_to_edit['exercises'][idx]
 
-        # Update the workout data and save it
-        self.save_workouts()
+        exercise_name_label.grid_forget()
+        sets_entry.grid_forget()
+        reps_entry.grid_forget()
+        delete_button.grid_forget()
 
-        # Refresh the display and UI
+        self.save_workouts()
         self.display_workouts()
+
+        self.update_exercise_list(workout_to_edit)
+
+    def update_exercise_list(self, workout_to_edit):
+        """
+        Update the exercise list after deletion.
+        """
+        exercises_frame = self.find_exercise_frame(workout_to_edit) 
+        for idx, exercise in enumerate(workout_to_edit['exercises']):
+            exercise_name_label = ctk.CTkLabel(exercises_frame, text=exercise['name'], font=("Helvetica", 16), anchor="w")
+            exercise_name_label.grid(row=idx, column=0, padx=10, pady=5, sticky="w")
+
+            sets_entry = ctk.CTkEntry(exercises_frame, placeholder_text="Sets", font=("Helvetica", 14))
+            sets_entry.insert(0, exercise.get('sets', ''))
+            sets_entry.grid(row=idx, column=1, padx=10, pady=5, sticky="ew")
+
+            reps_entry = ctk.CTkEntry(exercises_frame, placeholder_text="Reps", font=("Helvetica", 14))
+            reps_entry.insert(0, exercise.get('reps', ''))
+            reps_entry.grid(row=idx, column=2, padx=10, pady=5, sticky="ew")
+
+            delete_button = ctk.CTkButton(exercises_frame, text="Delete", fg_color="red", font=("Helvetica", 12))
+            delete_button.configure(command=partial(self.delete_exercise, workout_to_edit, idx, exercise_name_label, sets_entry, reps_entry, delete_button))
+            delete_button.grid(row=idx, column=3, padx=10, pady=5)
+
+
+
 
     def view_highlighted_workout(self) -> None:
         """
@@ -517,59 +544,90 @@ class Workout:
             # Create a new top-level window for viewing workout details
             view_window = ctk.CTkToplevel(self.root)
             view_window.title("Workout Details")
-            view_window.geometry("800x600")
+            view_window.geometry("1024x800")
 
-            # Create a scrollable frame for the workout details
+            # Create a scrollable frame inside the window
             scrollable_frame = ctk.CTkScrollableFrame(view_window)
             scrollable_frame.pack(fill="both", expand=True, padx=20, pady=20)
 
-            # Display the workout name in bold and large font
-            workout_name_label = ctk.CTkLabel(scrollable_frame, 
-                                            text=workout_to_view['name'], 
-                                            font=("Helvetica", 30, "bold"), 
-                                            text_color="black", anchor="w")
-            workout_name_label.pack(fill="x", padx=10, pady=10)
+            # Create a frame to hold form elements (like the title, description, etc.)
+            form_frame = ctk.CTkFrame(scrollable_frame, fg_color="transparent")
+            form_frame.pack(fill="both", expand=True, padx=10, pady=10)
 
-            # Display the workout description
-            workout_description_label = ctk.CTkLabel(scrollable_frame, 
-                                                    text=workout_to_view['description'], 
-                                                    font=("Helvetica", 20), 
-                                                    text_color="black", anchor="w")
-            workout_description_label.pack(fill="x", padx=10, pady=10)
+            # Configure form_frame grid (similar to edit_highlighted_workout)
+            form_frame.grid_rowconfigure(0, weight=0)
+            form_frame.grid_rowconfigure(1, weight=1)
+            form_frame.grid_rowconfigure(2, weight=0)
+            form_frame.grid_rowconfigure(3, weight=1)
+            form_frame.grid_rowconfigure(4, weight=0)
+            form_frame.grid_rowconfigure(5, weight=1)
+            form_frame.grid_columnconfigure(0, weight=1)
+            form_frame.grid_columnconfigure(1, weight=1)
+            form_frame.grid_columnconfigure(2, weight=1)
 
-            # Display the exercises section
-            exercises_frame = ctk.CTkFrame(scrollable_frame, fg_color="transparent")
-            exercises_frame.pack(fill="both", padx=10, pady=20)
+            # Workout Name (Large, Left-aligned)
+            workout_name_label = ctk.CTkLabel(form_frame, text=workout_to_view['name'], font=("Helvetica", 30, "bold"))
+            workout_name_label.grid(row=0, column=0, padx=20, pady=10, columnspan=3, sticky="w")
+
+            # Workout Description (Slightly smaller, Left-aligned)
+            workout_description_label = ctk.CTkLabel(form_frame, text=workout_to_view['description'], font=("Helvetica", 18))
+            workout_description_label.grid(row=1, column=0, padx=20, pady=10, columnspan=3, sticky="w")
+
+            # Days Header
+            days_header = ctk.CTkLabel(form_frame, text="DAYS", font=("Helvetica", 18, "bold"))
+            days_header.grid(row=2, column=0, padx=20, pady=10, sticky="w")
+
+            # Days Display (Checkboxes)
+            days_frame = ctk.CTkFrame(form_frame, fg_color="transparent")
+            days_frame.grid(row=3, column=0, columnspan=3, padx=20, pady=10, sticky="w")
+
+            for idx, day in enumerate(workout_to_view.get('days', [])):
+                checkbox_label = ctk.CTkLabel(days_frame, text=day, font=("Helvetica", 16))
+                checkbox_label.grid(row=idx, column=0, padx=10, pady=5, sticky="w")
+
+            # Exercise Section (Headers)
+            headers_frame = ctk.CTkFrame(form_frame, fg_color="transparent")
+            headers_frame.grid(row=4, column=0, columnspan=3, padx=20, pady=10, sticky="ew")
+
+            # Configure headers_frame grid (expand horizontally)
+            headers_frame.grid_columnconfigure(0, weight=3)
+            headers_frame.grid_columnconfigure(1, weight=1)
+            headers_frame.grid_columnconfigure(2, weight=1)
+
+            exercise_header = ctk.CTkLabel(headers_frame, text="EXERCISE", font=("Helvetica", 16, "bold"), anchor="w")
+            exercise_header.grid(row=0, column=0, padx=10, pady=5, sticky="w")
+
+            sets_header = ctk.CTkLabel(headers_frame, text="SETS", font=("Helvetica", 16, "bold"), anchor="center")
+            sets_header.grid(row=0, column=1, padx=10, pady=5, sticky="w")
+
+            reps_header = ctk.CTkLabel(headers_frame, text="REPS", font=("Helvetica", 16, "bold"), anchor="center")
+            reps_header.grid(row=0, column=2, padx=10, pady=5, sticky="w")
+
+            separator_frame = ctk.CTkFrame(headers_frame, fg_color="white", height=2)
+            separator_frame.grid(row=1, column=0, columnspan=3, padx=10, pady=5, sticky="ew")
+
+            # Exercise Inputs (Displaying Exercises)
+            exercises_frame = ctk.CTkFrame(form_frame, fg_color="transparent")
+            exercises_frame.grid(row=5, column=0, columnspan=3, padx=20, pady=10, sticky="ew")
+
+            exercises_frame.grid_columnconfigure(0, weight=3)
+            exercises_frame.grid_columnconfigure(1, weight=1)
+            exercises_frame.grid_columnconfigure(2, weight=1)
 
             if 'exercises' in workout_to_view:
-                # Create a header for exercises
-                exercises_header = ctk.CTkLabel(exercises_frame, 
-                                                text="Exercises:", 
-                                                font=("Helvetica", 24, "bold"), 
-                                                text_color="black", anchor="w")
-                exercises_header.pack(fill="x", padx=10, pady=10)
+                for idx, exercise in enumerate(workout_to_view['exercises']):
+                    # Exercise Name
+                    exercise_name_label = ctk.CTkLabel(exercises_frame, text=exercise['name'], font=("Helvetica", 24), anchor="w")
+                    exercise_name_label.grid(row=idx, column=0, padx=10, pady=5, sticky="w")
 
-                # Loop through the exercises and display them in a neat chart-like format
-                for exercise in workout_to_view['exercises']:
-                    exercise_name = exercise.get('name', 'Unnamed Exercise')
-                    sets = exercise.get('sets', 'N/A')
-                    reps = exercise.get('reps', 'N/A')
+                    # Sets Label
+                    sets_label = ctk.CTkLabel(exercises_frame, text=exercise.get('sets', ''), font=("Helvetica", 24), anchor="center")
+                    sets_label.grid(row=idx, column=1, padx=10, pady=5, sticky="w")
 
-                    # Create a row for each exercise
-                    exercise_row = ctk.CTkFrame(exercises_frame, fg_color="transparent")
-                    exercise_row.pack(fill="x", padx=10, pady=5)
+                    # Reps Label
+                    reps_label = ctk.CTkLabel(exercises_frame, text=exercise.get('reps', ''), font=("Helvetica", 24), anchor="center")
+                    reps_label.grid(row=idx, column=2, padx=10, pady=5, sticky="w")
 
-                    # Exercise name
-                    exercise_name_label = ctk.CTkLabel(exercise_row, text=exercise_name, font=("Helvetica", 18), anchor="w")
-                    exercise_name_label.pack(side="left", padx=10)
-
-                    # Sets and Reps
-                    sets_label = ctk.CTkLabel(exercise_row, text=f"Sets: {sets}", font=("Helvetica", 16), anchor="w")
-                    sets_label.pack(side="left", padx=10)
-
-                    reps_label = ctk.CTkLabel(exercise_row, text=f"Reps: {reps}", font=("Helvetica", 16), anchor="w")
-                    reps_label.pack(side="left", padx=10)
-
-            # Add a 'Close' button to close the view window
+            # Close button
             close_button = ctk.CTkButton(view_window, text="Close", command=view_window.destroy, width=250, height=40)
             close_button.pack(pady=20, padx=20, fill="x")
