@@ -10,8 +10,8 @@ We anticipate that this program will have several features that make it useful t
 # Our feature ideas:
 
 * A GUI to make our program easy to use
-** This should include descriptive buttons to navigate through the program, a title in the opening page of the GUI, and logical sequence to the program
-** This should also include large fonts and buttons for easy readability for low vision users, as well as contrasting fonts against the background for improved visibility
+* This should include descriptive buttons to navigate through the program, a title in the opening page of the GUI, and logical sequence to the program
+* This should also include large fonts and buttons for easy readability for low vision users, as well as contrasting fonts against the background for improved visibility
 * A feature to track time spent in a workout
 * A feature to allow users to input movements they've done throughout the workout
 * A feature that will briefly describe to a user how to properly do a movement
