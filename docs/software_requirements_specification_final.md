@@ -17,16 +17,16 @@
 - The workout program shall correctly clear time and workouts when the user clicks the button to do so.
 
 ### Category 3: Exercise Information
-- The workout program shall show exercise demonstrations to users who do not know how to perform them.
+- The workout program shall show exercise "How-to" summaries for every exercise.
 - The workout program shall have descriptions for each exercise.
 - The workout program shall have an extensive list of exercises for users to choose from.
 - The workout program shall have a list of exercises that users have done during their current workout.
-- The workout program shall track time properly, even when users change menus.
+- The workout program shall show users whether or not an exercise requires equipment for an exercise.
 
 ## Non-Functional Requirements
 
 ### Category 1: Usability and Accessibility
-- The workout program shall allow new users to perform basic tasks without training.
+- The workout program shall allow new users to easily use the program without much instruction.
 - The workout program shall be easily readable.
 - The workout program shall use contrasting colors to improve visibility.
 - The workout program shall utilize large fonts to help with low-vision usability.
@@ -44,4 +44,4 @@
 - The workout program shall load all features within 2 seconds of being run.
 - The workout program shall only store data temporarily to protect user privacy and security.
 - The workout program shall be easy to run.
-- The workout program shall be easily run from the command line.
+- The workout program shall be easily run from the command line, at it's most basic form.
