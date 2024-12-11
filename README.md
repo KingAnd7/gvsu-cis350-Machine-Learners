@@ -60,3 +60,7 @@ A cool, very on fleek, dapper exercise desktop program. The exercise program wil
      ```bash
      python main.py
      ```
+
+### Program Instructions:
+To read the manual on how to use the program, navigate to the `Instructions` tab on the left side and click on it. It shall provide you with a message box on how to use the program.
+
