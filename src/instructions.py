@@ -3,35 +3,28 @@ from tkinter import Text, Tk
 
 class Instructions:
     def __init__(self, root):
-        # Create Text widget for rich text formatting
         self.text = Text(root, wrap='word', height=100, width=120, font=("Arial", 16))
         self.text.pack(pady=20)
         
-        # Disable user editing (we just want it to display)
         self.text.configure(state="disabled")
 
-        # Create tags for styling (e.g., bold)
         self.text.tag_configure("bold", font=("Arial", 24, "bold"))
         self.text.tag_configure("header", font=("Arial", 18, "bold"))
         
-        # Insert formatted content
         self.insert_instructions()
 
     def insert_instructions(self):
-        # Enable the text widget for modification
         self.text.configure(state="normal")
         
-        # Clear existing content
         self.text.delete(1.0, "end")
 
-        # Insert content with tags (bold and headers)
         self.text.insert("end", "The purpose of this creation is to help you track workouts. It is technically unfinished, but here are a few rules on how to maximize your use of this program.\n\n", "bold")
         self.text.insert("end", "To begin, make sure you are doing this:\n", "bold")
         self.text.insert("end", "\t- Make sure you are in fullscreen mode.\n")
         self.text.insert("end", "\t- Expect bugs and glitches, and jank.\n")
         self.text.insert("end", "\n")
 
-        # Insert section 1: WORKOUT page
+        # section 1: WORKOUT page
         self.text.insert("end", "1. WORKOUT page.\n\n", "header")
         self.text.insert("end", "1.1 Intro:\n")
         self.text.insert("end", "The WORKOUT page is where you will probably spend most of your time. This is where you create, edit, and delete workout routines that you want to make. Workouts and their associated data are saved until deleted, even after ending the program.\n\n")
