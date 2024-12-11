@@ -8,11 +8,55 @@ A cool, very on fleek, dapper exercise desktop program. The exercise program wil
 * [Preston Thomas](https://github.com/preston-thomas/CIS350-HW2-Thomas) (Project manager, coder, project developer, professional weightlifter, documenter proof-reader)
 * [Chai Callow](https://github.com/callchai/CIS350-HW2-Callow) (Documenter, coder, project developer)
 
-## Prerequisites
-Users must have a working installation of Python on their machine.
-
 ## Run Instructions
-Fork repository, then clone it into your machine.
-Open terminal, go to file directory of repository.
-Go to src directory.
-Type "python3 main.py".
+
+#### 1. Install the latest version of Python.
+   - Visit the official Python website: [https://www.python.org/downloads/](https://www.python.org/downloads/).
+   - Download the appropriate installer for your operating system (Windows, MacOS).
+   - Run the installer and ensure that the "Add Python to PATH" option is selected during installation.
+   - Verify the installation by opening a terminal and typing `python3 --version` or `python --version`.
+
+#### 2. Make sure you have `tkinter` and `customtkinter` installed.
+   - `tkinter`:
+     - For most systems, `tkinter` comes pre-installed with Python. Verify by running `python3 -m tkinter` in the terminal. If a window appears, `tkinter` is installed.
+     - If not installed, follow the appropriate steps for your system:
+       - **MacOS**: Ensure you have the latest version of Python from python.org.
+         - For newer MacBooks, you can use [Homebrew](https://brew.sh/) to install Python by running:
+         ```bash
+         brew install python
+         ```
+       - **Windows**: Reinstall Python and ensure `tkinter` is included.
+   - `customtkinter`:
+     - Install via pip by running `pip install customtkinter`.
+       - If on Mac, try `brew install customtkinter`.
+   - **Note for installation:**
+     - If you are getting messages saying something called `pip` is not installed on a Mac system, try installing it in the terminal using:
+      ```bash
+      brew install pip
+      ```
+      - Or try:
+        ```bash
+        python -m ensurepip --upgrade
+        ```
+
+#### 3. Clone this repository.
+   - Navigate to your terminal and type:
+     ```bash
+     git clone https://github.com/KingAnd7/gvsu-cis350-Machine-Learners/tree/main
+     ```
+
+#### 4. In your terminal, navigate to the `src` directory for the repository.
+   - Use the `cd` command to navigate to the `src` folder. It is most likely in the `main` folder if you are cloning this for the first time. For example:
+     ```bash
+     cd gvsu-cis350-Machine-Learners/main/src
+     ```
+
+### 5. Run the program.
+   - Type the following command in the terminal:
+     ```bash
+     python3 main.py
+     ```
+   - If `python3` is not recognized, you can try:
+     ```bash
+     python main.py
+     ```
