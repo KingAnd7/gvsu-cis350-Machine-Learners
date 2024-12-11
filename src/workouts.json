@@ -1,0 +1,19 @@
+[
+    {
+        "name": "Arms",
+        "description": "get rid of my spaghetti arms",
+        "days": [
+            "Friday"
+        ],
+        "exercises": [
+            {
+                "name": "Pull Up",
+                "primary_muscle": "Back",
+                "secondary_muscle": "Biceps",
+                "equipment": "Pull-Up Bar",
+                "sets": "100",
+                "reps": "1000"
+            }
+        ]
+    }
+]
